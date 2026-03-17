@@ -161,3 +161,57 @@ cursor:pointer;
 button:hover{
 background:#4f46e5;
 }
+/* ACTIVE STOP */
+.stop.active{
+background:#22c55e;
+transform:translateX(-50%) scale(1.15);
+}
+
+/* GLASS POPUP (SIDE CARD STYLE) */
+.popup{
+position:fixed;
+right:20px;
+top:50%;
+transform:translateY(-50%);
+width:300px;
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(10px);
+border-radius:15px;
+padding:20px;
+display:none;
+transition:0.3s;
+}
+
+.popup.show{
+display:block;
+animation:slideIn 0.4s ease;
+}
+
+@keyframes slideIn{
+from{transform:translate(100px,-50%);opacity:0;}
+to{transform:translate(0,-50%);opacity:1;}
+}
+
+/* BUTTONS PREMIUM */
+button{
+padding:12px 25px;
+border:none;
+border-radius:10px;
+background:linear-gradient(135deg,#6366f1,#06b6d4);
+color:white;
+font-weight:bold;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.1);
+}
+
+/* ROAD IMPROVEMENT */
+.road-container{
+border-radius:20px;
+overflow:hidden;
+background:#020617;
+padding-bottom:40px;
+}
