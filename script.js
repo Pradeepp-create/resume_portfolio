@@ -1,9 +1,12 @@
 const bus = document.getElementById("bus");
-const progress = document.getElementById("progress");
+const progress = document.getElementById("progress"); // (optional if unused)
 const stops = document.querySelectorAll(".stop");
 
 const title = document.getElementById("title");
 const desc = document.getElementById("desc");
+
+const path = document.getElementById("roadPath");
+const pathLength = path.getTotalLength();
 
 let current = 0;
 let typingTimeout;
@@ -142,33 +145,42 @@ function typeText(text){
     if(i < text.length){
       desc.innerHTML += text.charAt(i);
       i++;
-      typingTimeout = setTimeout(typing, 12); // speed
+      typingTimeout = setTimeout(typing, 12);
     }
   }
 
   typing();
 }
 
-/* 🚀 MOVE FUNCTION */
+/* 🚀 CURVED MOVEMENT */
 function goToStop(i){
   if(i < 0 || i >= stops.length) return;
 
   current = i;
 
-  let pos = stops[i].style.left;
+  // 🔥 convert index → path position
+  let percent = i / (stops.length - 1);
+  let point = path.getPointAtLength(percent * pathLength);
+  let nextPoint = path.getPointAtLength((percent * pathLength) + 1);
 
-  // smooth movement
-  bus.style.left = pos;
-  progress.style.width = pos;
+  // 🔄 rotation angle
+  let angle = Math.atan2(
+    nextPoint.y - point.y,
+    nextPoint.x - point.x
+  ) * 180 / Math.PI;
 
-  // active highlight
+  // 🚌 move + rotate
+  bus.style.transform = `
+    translate(${point.x}px, ${point.y}px)
+    rotate(${angle}deg)
+  `;
+
+  // 🎯 active stop
   stops.forEach(s => s.classList.remove("active"));
   stops[i].classList.add("active");
 
-  // update content
+  // 📝 content update
   title.innerText = stops[i].innerText;
-
-  // 🔥 typing animation instead of instant text
   typeText(data[i]);
 }
 
