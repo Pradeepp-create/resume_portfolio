@@ -65,28 +65,46 @@ function goToStop(index){
   current = index;
 
   const length = path.getTotalLength();
-  const point = path.getPointAtLength((index/(stops.length-1)) * length);
+  const target = (index/(stops.length-1)) * length;
 
-  const nextPoint = path.getPointAtLength(((index+0.01)/(stops.length-1)) * length);
+  let start = null;
 
-  const angle = Math.atan2(
-    nextPoint.y - point.y,
-    nextPoint.x - point.x
-  ) * 180 / Math.PI;
+  function animate(time){
 
-  // 🔥 PERFECT ALIGN FIX (important)
-  bus.style.transform =
-    `translate(${point.x}px, ${point.y}px) translate(-50%,-60%) rotate(${angle}deg)`;
+    if(!start) start = time;
+    const progress = time - start;
 
-  // ACTIVE STOP UI
+    const duration = 800; // speed
+    const t = Math.min(progress / duration, 1);
+
+    const point = path.getPointAtLength(target * t);
+
+    const nextPoint = path.getPointAtLength(
+      Math.min(target * t + 1, length)
+    );
+
+    const angle = Math.atan2(
+      nextPoint.y - point.y,
+      nextPoint.x - point.x
+    ) * 180 / Math.PI;
+
+    bus.style.transform =
+    `translate(${point.x}px, ${point.y}px) translate(-50%,-75%) rotate(${angle}deg)`;
+
+    if(t < 1){
+      requestAnimationFrame(animate);
+    }
+  }
+
+  requestAnimationFrame(animate);
+
+  // UI update
   stops.forEach(s => s.classList.remove("active"));
   stops[index].classList.add("active");
 
-  // UPDATE TEXT
   document.getElementById("title").innerText = data[index].title;
   document.getElementById("desc").innerText = data[index].desc;
 }
-
 // NAV BUTTONS
 function nextStop(){
   if(current < stops.length-1){
