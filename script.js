@@ -104,6 +104,10 @@ function goToStop(index){
 
   document.getElementById("title").innerText = data[index].title;
   document.getElementById("desc").innerText = data[index].desc;
+
+  // PROGRESS UPDATE
+  const progress = (index / (stops.length - 1)) * 100;
+  document.getElementById("progressFill").style.width = progress + "%";
 }
 // NAV BUTTONS
 function nextStop(){
