@@ -1,204 +1,106 @@
 const bus = document.getElementById("bus");
-const progress = document.getElementById("progress"); // (optional if unused)
+const path = document.getElementById("roadPath");
 const stops = document.querySelectorAll(".stop");
 
-const title = document.getElementById("title");
-const desc = document.getElementById("desc");
-
-const path = document.getElementById("roadPath");
-const pathLength = path.getTotalLength();
-
 let current = 0;
-let typingTimeout;
 
-/* 🔥 YOUR FULL DATA (UNCHANGED) */
+// STOP CONTENT
 const data = [
 
-`Pradeep . M
-B.E (Hons) Electronics and Communication Engineering
+{
+title: "Pradeep . M",
+desc: "B.E (Hons) in Electronics and Communication Engineering\n\nAddress: Sriperumbudur (near toll plaza)\n\nWelcome to my portfolio.\nI am passionate about building modern tech solutions and constantly improving my skills."
+},
 
-Address: (Add your full address here)
+{
+title: "Career Objective",
+desc: "A highly motivated individual with strong interest in technology and innovation.\n\nSkilled in Python, Cloud Computing, Marketing, and Website Building.\n\nPossess good time management and problem-solving skills.\n\nSeeking opportunities to grow professionally and contribute effectively in a dynamic organization."
+},
 
-Welcome! I am passionate about building modern websites and exploring technology.
-This portfolio showcases my journey, skills, and achievements in a clean interactive way.`,
+{
+title: "Education",
+desc: "B.E (Hons) in Electronics and Communication Engineering\n\nSt. Joseph College of Engineering\nNear Toll Plaza, Sriperumbudur\n(2022 - 2026)\n\nCGPA: 8.5\n\nSpecialized in:\nPython\nCloud Computing\nMarketing\nWebsite Building"
+},
 
-`Career Objective:
+{
+title: "Skills",
+desc: "Web Technologies:\nHTML\nCSS\nJavaScript\n\nTools:\nGit\nGitHub\nMATLAB\n\nSoft Skills:\nTeam Collaboration\nTime Management\nCreativity\nAdaptability\n\nProgramming:\nPython\nJava\nSQL"
+},
 
-Strong interest in technology and software development.
+{
+title: "Professional Experience",
+desc: "Internship:\nCloud Computing - Gateway Software Solutions\n(July 2025 - Aug 2025)\n\nValue Added Course:\nBest Route Consulting\n(March 2025)"
+},
 
-Skilled in Python, Cloud Computing, Marketing, and Website Building.
+{
+title: "Projects",
+desc: "(a) Waste Segregation based on Waste Types\n\n(b) Digital Acoustic Signal Processing for Intelligent Welding Monitoring\n\n(c) E-commerce Website"
+},
 
-Excellent time management and problem-solving skills.
+{
+title: "Certificates & Achievements",
+desc: "(a) Digital Productivity Training on Microsoft Office\n\n(b) Cloud Computing - Gateway Software Solutions\n\n(c) Communication Skills - Non Verbal Communication\n\n(d) Employability Skills - Interview & Etiquettes\n\n(e) AI Fluency - AI Tools for Designing"
+},
 
-Seeking opportunities to enhance my knowledge and contribute to real-world projects.`,
+{
+title: "Contact",
+desc: "Email: pradeeptn22@gmail.com\n\nPhone: +91 7550199164\n\nLinkedIn: (add your link)\nGitHub: (add your link)"
+},
 
-`Education:
+{
+title: "Technical Profile",
+desc: "Programming Languages:\nPython, C, C++\n\nLanguages Known:\nTamil, English\n\nTools:\nExcel, Word, PowerPoint"
+},
 
-B.E (Hons) in Electronics and Communication Engineering
-
-St. Joseph College of Engineering
-Near Toll Plaza, Sriperumbudur
-
-Duration: 2022 – 2026  
-CGPA: 8.5
-
-Specialized in:
-• Python  
-• Cloud Computing  
-• Marketing  
-• Website Building`,
-
-`Skills:
-
-Web Technologies:
-• HTML  
-• CSS  
-• JavaScript  
-
-Tools:
-• Git  
-• GitHub  
-• MATLAB  
-
-Soft Skills:
-• Team Collaboration  
-• Time Management  
-• Creativity  
-• Adaptability  
-
-Programming:
-• Python  
-• Java  
-• SQL`,
-
-`Professional Experience:
-
-Internship:
-Cloud Computing  
-Gateway Software Solutions  
-Duration: July 2025 – August 2025  
-
-Value Added Course:
-Best Route Consulting  
-Duration: March 2025`,
-
-`Projects:
-
-1. Waste Segregation System  
-   - Classifies waste based on types  
-
-2. Digital Acoustic Signal Processing  
-   - Intelligent welding monitoring system  
-
-3. E-commerce Website  
-   - Built using HTML, CSS, JavaScript`,
-
-`Certificates & Achievements:
-
-• Digital Productivity Training (Microsoft Office)  
-• Cloud Computing Certification (Gateway Software Solutions)  
-• Communication Skills Training (Non-verbal Communication)  
-• Employability Skills (Interview Skills & Etiquettes)  
-• AI Fluency Training (AI Tools for Designing)`,
-
-`Contact:
-
-Email: pradeeptn22@gmail.com  
-Phone: +91 7550199164  
-
-LinkedIn: (Add your link)  
-GitHub: (Add your link)`,
-
-`Additional Information:
-
-Programming Languages:
-• Python  
-• C  
-• C++  
-
-Languages Known:
-• Tamil  
-• English  
-
-Tools:
-• Excel  
-• Word  
-• PowerPoint`,
-
-`Journey Complete 🚀
-
-Thank you for visiting my portfolio!
-
-I am continuously learning and building new projects.
-Excited for future opportunities and challenges ahead.`
+{
+title: "Journey Complete 🎉",
+desc: "Thank you for exploring my portfolio.\n\nThis journey represents my growth, skills, and passion for technology.\n\nLet’s connect and build something amazing 🚀"
+}
 
 ];
 
-/* ✨ TYPEWRITER EFFECT */
-function typeText(text){
-  clearTimeout(typingTimeout);
-  desc.innerHTML = "";
+// MOVE BUS
+function goToStop(index){
 
-  let i = 0;
+  current = index;
 
-  function typing(){
-    if(i < text.length){
-      desc.innerHTML += text.charAt(i);
-      i++;
-      typingTimeout = setTimeout(typing, 8);
-    }
-  }
+  const length = path.getTotalLength();
+  const point = path.getPointAtLength((index/(stops.length-1)) * length);
 
-  typing();
-}
+  const nextPoint = path.getPointAtLength(((index+0.01)/(stops.length-1)) * length);
 
-/* 🚀 CURVED MOVEMENT */
-function goToStop(i){
-  if(i < 0 || i >= stops.length) return;
-
-  current = i;
-
-  // 🔥 convert index → path position
-  let percent = i / (stops.length - 1);
-  let point = path.getPointAtLength(percent * pathLength);
-  let nextPoint = path.getPointAtLength((percent * pathLength) + 1);
-
-  // 🔄 rotation angle
-  let angle = Math.atan2(
+  const angle = Math.atan2(
     nextPoint.y - point.y,
     nextPoint.x - point.x
   ) * 180 / Math.PI;
 
-  // 🚌 move + rotate
-  bus.style.transform = `
-    translate(${point.x}px, ${point.y}px)
-    rotate(${angle}deg)
-  `;
+  // 🔥 PERFECT ALIGN FIX (important)
+  bus.style.transform =
+    `translate(${point.x}px, ${point.y}px) translate(-50%,-60%) rotate(${angle}deg)`;
 
-  // 🎯 active stop
+  // ACTIVE STOP UI
   stops.forEach(s => s.classList.remove("active"));
-  stops[i].classList.add("active");
+  stops[index].classList.add("active");
 
-  // 📝 content update
-  title.innerText = stops[i].innerText;
-  typeText(data[i]);
+  // UPDATE TEXT
+  document.getElementById("title").innerText = data[index].title;
+  document.getElementById("desc").innerText = data[index].desc;
 }
 
-/* ⬅➡ NAVIGATION */
+// NAV BUTTONS
 function nextStop(){
-  goToStop(current + 1);
+  if(current < stops.length-1){
+    goToStop(current+1);
+  }
 }
 
 function prevStop(){
-  goToStop(current - 1);
+  if(current > 0){
+    goToStop(current-1);
+  }
 }
 
-/* 🖱 CLICK SUPPORT */
-stops.forEach((s, i)=>{
-  s.addEventListener("click", () => goToStop(i));
-});
-
-/* 🎬 INIT */
+// INIT POSITION
 window.onload = () => {
   goToStop(0);
 };
