@@ -145,7 +145,7 @@ function typeText(text){
     if(i < text.length){
       desc.innerHTML += text.charAt(i);
       i++;
-      typingTimeout = setTimeout(typing, 12);
+      typingTimeout = setTimeout(typing, 8);
     }
   }
 
