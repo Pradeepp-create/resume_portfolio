@@ -1,53 +1,77 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pradeep Portfolio</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<section class="journey">
+<div class="journey">
 
-<h2 class="title">My Journey</h2>
+  <!-- LEFT SIDE (ROAD + BUS) -->
+  <div class="road-container">
 
-<div class="road-container">
+    <svg viewBox="0 0 1000 300" class="road-svg">
 
-  <div class="road-bg"></div>
-  <div class="progress" id="progress"></div>
+      <!-- CURVED ROAD -->
+      <path id="roadPath"
+            d="M 50 220 
+               C 200 100, 400 300, 600 200 
+               S 900 120, 950 200"
+            stroke="#111"
+            stroke-width="60"
+            fill="none"
+            stroke-linecap="round"/>
 
-  <div class="bus" id="bus">
-    <div class="bus-body"></div>
-    <div class="wheel wheel1"></div>
-    <div class="wheel wheel2"></div>
+      <!-- WHITE DASH LINE -->
+      <path
+            d="M 50 220 
+               C 200 100, 400 300, 600 200 
+               S 900 120, 950 200"
+            stroke="white"
+            stroke-width="6"
+            fill="none"
+            stroke-dasharray="20 20"/>
+
+    </svg>
+
+    <!-- BUS -->
+    <div id="bus" class="bus">
+      <div class="bus-body"></div>
+      <div class="wheel wheel1"></div>
+      <div class="wheel wheel2"></div>
+    </div>
+
+    <!-- STOPS -->
+    <div class="stop" style="left:5%">Intro</div>
+    <div class="stop" style="left:15%">Objective</div>
+    <div class="stop" style="left:25%">Education</div>
+    <div class="stop" style="left:35%">Skills</div>
+    <div class="stop" style="left:45%">Experience</div>
+    <div class="stop" style="left:55%">Projects</div>
+    <div class="stop" style="left:65%">Certificates</div>
+    <div class="stop" style="left:75%">Contact</div>
+    <div class="stop" style="left:85%">Extras</div>
+    <div class="stop" style="left:95%">Finish</div>
+
   </div>
 
-  <!-- STOPS -->
-  <div class="stop" style="left:5%">👤 Intro</div>
-  <div class="stop" style="left:15%">🎯 Objective</div>
-  <div class="stop" style="left:25%">🎓 Education</div>
-  <div class="stop" style="left:35%">🧠 Skills</div>
-  <div class="stop" style="left:45%">💼 Experience</div>
-  <div class="stop" style="left:55%">🚀 Projects</div>
-  <div class="stop" style="left:65%">🏆 Certificates</div>
-  <div class="stop" style="left:75%">📞 Contact</div>
-  <div class="stop" style="left:85%">🌐 Languages</div>
-  <div class="stop" style="left:95%">✅ Finish</div>
+  <!-- RIGHT SIDE (POPUP) -->
+  <div class="popup">
 
-</div>
+    <h3 id="title"></h3>
+    <p id="desc"></p>
 
-</section>
+    <div class="nav-btns">
+      <button onclick="prevStop()">⬅ Previous</button>
+      <button onclick="nextStop()">Next ➡</button>
+    </div>
 
-<!-- POPUP PANEL -->
-<div id="popup" class="popup">
-  <h3 id="title"></h3>
-  <p id="desc"></p>
-
-  <div class="nav-btns">
-    <button onclick="prevStop()">← Previous</button>
-    <button onclick="nextStop()">Next →</button>
   </div>
+
 </div>
 
 <script src="script.js"></script>
