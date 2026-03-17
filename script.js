@@ -4,84 +4,151 @@ const stops = document.querySelectorAll(".stop");
 
 const title = document.getElementById("title");
 const desc = document.getElementById("desc");
-const popup = document.getElementById("popup");
 
 let current = 0;
 
-/* DATA */
+/* 🔥 FULL DATA (YOUR COMPLETE CONTENT) */
 const data = [
-`Pradeep M
-B.E (Hons) ECE
 
-Welcome! Passionate about tech and building modern websites.
-This is my journey 🚀`,
+`Pradeep . M
+B.E (Hons) Electronics and Communication Engineering
+
+Address: (Add your full address here)
+
+Welcome! I am passionate about building modern websites and exploring technology.
+This portfolio showcases my journey, skills, and achievements in a clean interactive way.`,
 
 `Career Objective:
-Strong interest in development.
-Skilled in Python, Cloud, Marketing, Web Dev.
-Good time management & seeking opportunities.`,
+
+Strong interest in technology and software development.
+
+Skilled in Python, Cloud Computing, Marketing, and Website Building.
+
+Excellent time management and problem-solving skills.
+
+Seeking opportunities to enhance my knowledge and contribute to real-world projects.`,
 
 `Education:
+
+B.E (Hons) in Electronics and Communication Engineering
+
 St. Joseph College of Engineering
-Sriperumbudur (2022–2026)
-CGPA: 8.5`,
+Near Toll Plaza, Sriperumbudur
+
+Duration: 2022 – 2026  
+CGPA: 8.5
+
+Specialized in:
+• Python  
+• Cloud Computing  
+• Marketing  
+• Website Building`,
 
 `Skills:
-HTML, CSS, JS
-Git, GitHub, MATLAB
-Python, Java, SQL`,
 
-`Experience:
-Cloud Internship - Gateway Software
-July–Aug 2025
-Course - Best Route (March 2025)`,
+Web Technologies:
+• HTML  
+• CSS  
+• JavaScript  
+
+Tools:
+• Git  
+• GitHub  
+• MATLAB  
+
+Soft Skills:
+• Team Collaboration  
+• Time Management  
+• Creativity  
+• Adaptability  
+
+Programming:
+• Python  
+• Java  
+• SQL`,
+
+`Professional Experience:
+
+Internship:
+Cloud Computing  
+Gateway Software Solutions  
+Duration: July 2025 – August 2025  
+
+Value Added Course:
+Best Route Consulting  
+Duration: March 2025`,
 
 `Projects:
-Waste Segregation
-Welding Monitoring
-E-commerce Website`,
 
-`Certificates:
-Microsoft Office
-Cloud Computing
-Communication
-Interview Skills
-AI Tools`,
+1. Waste Segregation System  
+   - Classifies waste based on types  
+
+2. Digital Acoustic Signal Processing  
+   - Intelligent welding monitoring system  
+
+3. E-commerce Website  
+   - Built using HTML, CSS, JavaScript`,
+
+`Certificates & Achievements:
+
+• Digital Productivity Training (Microsoft Office)  
+• Cloud Computing Certification (Gateway Software Solutions)  
+• Communication Skills Training (Non-verbal Communication)  
+• Employability Skills (Interview Skills & Etiquettes)  
+• AI Fluency Training (AI Tools for Designing)`,
 
 `Contact:
-Email: pradeeptn22@gmail.com
-Phone: +91 7550199164`,
 
-`Languages:
-Python, C, C++
-Tamil, English`,
+Email: pradeeptn22@gmail.com  
+Phone: +91 7550199164  
 
-`Journey Complete 🚀`
+LinkedIn: (Add your link)  
+GitHub: (Add your link)`,
+
+`Additional Information:
+
+Programming Languages:
+• Python  
+• C  
+• C++  
+
+Languages Known:
+• Tamil  
+• English  
+
+Tools:
+• Excel  
+• Word  
+• PowerPoint`,
+
+`Journey Complete 🚀
+
+Thank you for visiting my portfolio!
+
+I am continuously learning and building new projects.
+Excited for future opportunities and challenges ahead.`
+
 ];
 
 /* MAIN FUNCTION */
-function goToStop(index){
-  if(index < 0 || index >= stops.length) return;
+function goToStop(i){
+  if(i < 0 || i >= stops.length) return;
 
-  current = index;
+  current = i;
 
-  let pos = stops[index].style.left;
+  let pos = stops[i].style.left;
 
   bus.style.left = pos;
   progress.style.width = pos;
 
-  // highlight active stop
   stops.forEach(s => s.classList.remove("active"));
-  stops[index].classList.add("active");
+  stops[i].classList.add("active");
 
-  // update content
-  title.innerText = stops[index].innerText;
-  desc.innerText = data[index];
-
-  popup.classList.add("show");
+  title.innerText = stops[i].innerText;
+  desc.innerText = data[i];
 }
 
-/* BUTTONS */
+/* NAVIGATION */
 function nextStop(){
   goToStop(current + 1);
 }
@@ -90,12 +157,10 @@ function prevStop(){
   goToStop(current - 1);
 }
 
-/* CLICK STOPS */
-stops.forEach((stop, i)=>{
-  stop.addEventListener("click", ()=> goToStop(i));
+/* CLICK SUPPORT */
+stops.forEach((s, i)=>{
+  s.onclick = () => goToStop(i);
 });
 
 /* INIT */
-window.onload = () => {
-  goToStop(0);
-};
+window.onload = () => goToStop(0);
