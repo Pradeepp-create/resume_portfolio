@@ -121,6 +121,11 @@ function goToStop(index){
   // PROGRESS UPDATE
   const progress = (index / (stops.length - 1)) * 100;
   document.getElementById("progressFill").style.width = progress + "%";
+
+  // UPDATE DOTS
+  const dots = document.querySelectorAll(".dot");
+  dots.forEach(d => d.classList.remove("active"));
+  dots[index].classList.add("active");
 }
 // NAV BUTTONS
 function nextStop(){
