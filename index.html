@@ -8,14 +8,9 @@
 
 <body>
 
-<section class="hero">
-  <h1>Pradeep . M</h1>
-  <p>B.E (Hons) Electronics & Communication Engineering</p>
-</section>
-
 <section class="journey">
 
-<h2>My Journey 🚀</h2>
+<h2 class="title">My Journey</h2>
 
 <div class="road-container">
 
@@ -28,7 +23,7 @@
     <div class="wheel wheel2"></div>
   </div>
 
-  <!-- 10 STOPS -->
+  <!-- STOPS -->
   <div class="stop" style="left:5%">Intro</div>
   <div class="stop" style="left:15%">Objective</div>
   <div class="stop" style="left:25%">Education</div>
@@ -42,18 +37,17 @@
 
 </div>
 
-<!-- NAV BUTTONS -->
-<div class="controls">
-  <button onclick="prevStop()">⬅ Previous</button>
-  <button onclick="nextStop()">Next ➡</button>
-</div>
-
 </section>
 
-<!-- POPUP -->
+<!-- POPUP PANEL -->
 <div id="popup" class="popup">
   <h3 id="title"></h3>
   <p id="desc"></p>
+
+  <div class="nav-btns">
+    <button onclick="prevStop()">← Previous</button>
+    <button onclick="nextStop()">Next →</button>
+  </div>
 </div>
 
 <script src="script.js"></script>
