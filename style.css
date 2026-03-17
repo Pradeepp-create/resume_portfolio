@@ -1,0 +1,163 @@
+body{
+margin:0;
+font-family:Arial;
+background:#0b1120;
+color:white;
+text-align:center;
+overflow-x:hidden;
+}
+
+/* HERO */
+.hero{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+background:linear-gradient(135deg,#6366f1,#06b6d4);
+}
+
+/* JOURNEY */
+.journey{
+padding:80px 20px;
+background:#020617;
+}
+
+.road-container{
+position:relative;
+height:180px;
+overflow:hidden;
+}
+
+/* MOVING ROAD BG */
+.road-bg{
+position:absolute;
+width:200%;
+height:100%;
+background:repeating-linear-gradient(
+90deg,
+#1e293b 0px,
+#1e293b 40px,
+#334155 40px,
+#334155 80px
+);
+animation:moveRoad 3s linear infinite;
+}
+
+@keyframes moveRoad{
+from{transform:translateX(0);}
+to{transform:translateX(-50%);}
+}
+
+/* PROGRESS */
+.progress{
+position:absolute;
+top:50%;
+left:0;
+height:4px;
+background:#22c55e;
+width:0%;
+transform:translateY(-50%);
+}
+
+/* BUS */
+.bus{
+position:absolute;
+top:40px;
+width:100px;
+height:50px;
+transition:left 0.5s linear;
+}
+
+/* BUS BODY */
+.bus-body{
+width:100%;
+height:100%;
+background:#facc15;
+border-radius:10px;
+}
+
+/* WHEELS */
+.wheel{
+width:20px;
+height:20px;
+background:black;
+border-radius:50%;
+position:absolute;
+bottom:-10px;
+animation:spin 0.5s linear infinite;
+}
+
+.wheel1{ left:15px; }
+.wheel2{ right:15px; }
+
+@keyframes spin{
+from{transform:rotate(0);}
+to{transform:rotate(360deg);}
+}
+
+/* STOPS */
+.stop{
+position:absolute;
+top:110px;
+transform:translateX(-50%);
+background:#1e293b;
+padding:8px 12px;
+border-radius:20px;
+font-size:13px;
+}
+
+/* POPUP */
+.popup{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.7);
+justify-content:center;
+align-items:center;
+}
+
+.popup-content{
+background:#111827;
+padding:25px;
+border-radius:12px;
+width:280px;
+}
+
+/* 📱 MOBILE */
+@media(max-width:600px){
+
+.hero h1{
+font-size:24px;
+}
+
+.bus{
+width:70px;
+}
+
+.stop{
+font-size:10px;
+padding:6px 8px;
+}
+
+}
+
+.controls{
+margin-top:40px;
+}
+
+button{
+padding:10px 20px;
+margin:10px;
+border:none;
+border-radius:8px;
+background:#6366f1;
+color:white;
+cursor:pointer;
+}
+
+button:hover{
+background:#4f46e5;
+}
