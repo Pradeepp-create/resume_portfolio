@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pradeep Portfolio</title>
+<title>Journey Portfolio</title>
 <link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
@@ -13,67 +12,68 @@
 
   <!-- LEFT SIDE (ROAD + BUS) -->
   <div class="road-container">
-    <div class="cloud cloud1"></div>
-    <div class="cloud cloud2"></div>
-    <svg viewBox="0 0 1000 300" class="road-svg">
 
-      <!-- CURVED ROAD -->
-      <path id="roadPath"
-            d="M 50 220 
-               C 200 100, 400 300, 600 200 
-               S 900 120, 950 200"
-            stroke="#111"
-            stroke-width="60"
-            fill="none"
-            stroke-linecap="round"/>
+    <!-- CLOUDS -->
+    <div class="cloud cloud--xl"></div>
+    <div class="cloud cloud--lg"></div>
+    <div class="cloud cloud--md"></div>
+    <div class="cloud cloud--sm"></div>
 
-      <!-- WHITE DASH LINE -->
-      <path
-            d="M 50 220 
-               C 200 100, 400 300, 600 200 
-               S 900 120, 950 200"
-            stroke="white"
-            stroke-width="6"
-            fill="none"
-            stroke-dasharray="20 20"/>
-
+    <!-- ROAD SVG -->
+    <svg class="road-svg" viewBox="0 0 1000 500">
+      <path id="roadPath" d="M50 400 Q300 100 600 350 T950 200"></path>
+      <path class="road-dash" d="M50 400 Q300 100 600 350 T950 200"></path>
     </svg>
 
     <!-- BUS -->
-    <div id="bus" class="bus">
+    <div id="bus">
       <div class="bus-body"></div>
       <div class="wheel wheel1"></div>
       <div class="wheel wheel2"></div>
+      <div class="bus-shadow"></div>
     </div>
 
     <!-- STOPS -->
-    <div class="stop" style="left:5%">Intro</div>
-    <div class="stop" style="left:15%">Objective</div>
-    <div class="stop" style="left:25%">Education</div>
-    <div class="stop" style="left:35%">Skills</div>
-    <div class="stop" style="left:45%">Experience</div>
-    <div class="stop" style="left:55%">Projects</div>
-    <div class="stop" style="left:65%">Certificates</div>
-    <div class="stop" style="left:75%">Contact</div>
-    <div class="stop" style="left:85%">Extras</div>
-    <div class="stop" style="left:95%">Finish</div>
+    <div class="stop" style="left:5%" onclick="goToStop(0)">Intro</div>
+    <div class="stop" style="left:15%" onclick="goToStop(1)">Objective</div>
+    <div class="stop" style="left:25%" onclick="goToStop(2)">Education</div>
+    <div class="stop" style="left:35%" onclick="goToStop(3)">Skills</div>
+    <div class="stop" style="left:45%" onclick="goToStop(4)">Experience</div>
+    <div class="stop" style="left:55%" onclick="goToStop(5)">Projects</div>
+    <div class="stop" style="left:65%" onclick="goToStop(6)">Certificates</div>
+    <div class="stop" style="left:75%" onclick="goToStop(7)">Contact</div>
+    <div class="stop" style="left:85%" onclick="goToStop(8)">Tech Stack</div>
+    <div class="stop" style="left:95%" onclick="goToStop(9)">Finish</div>
 
   </div>
 
-  <!-- RIGHT SIDE (POPUP) -->
+  <!-- RIGHT SIDE -->
   <div class="popup">
-  <div class="popup-card">
-    <h3 id="title"></h3>
-    <p id="desc"></p>
+    <div class="popup-card fade-in">
 
-    <div class="nav-btns">
-      <button onclick="prevStop()">⬅ Previous</button>
-      <button onclick="nextStop()">Next ➡</button>
+      <div class="popup-header">
+        <div class="popup-avatar">P</div>
+        <div>
+          <h3 id="title">Start</h3>
+          <div class="popup-sub">Your journey begins here</div>
+        </div>
+      </div>
+
+      <div class="popup-body" id="desc">
+Welcome to my interactive portfolio 🚀
+Click stops to explore.
+      </div>
+
+      <div class="nav-btns">
+        <button onclick="prevStop()">⬅ Prev</button>
+        <button onclick="nextStop()">Next ➡</button>
+      </div>
+
     </div>
   </div>
+
 </div>
 
 <script src="script.js"></script>
-
 </body>
 </html>
