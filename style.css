@@ -35,8 +35,24 @@ background:linear-gradient(to top,#bfdbfe,#e0f2fe,#f8fafc);
 position:absolute;
 background:white;
 border-radius:50%;
-opacity:0.7;
-animation:cloudMove 40s linear infinite;
+opacity:0.9;
+filter:blur(2px);
+}
+
+.cloud1{
+width:180px;
+height:80px;
+top:60px;
+left:-200px;
+animation:cloudMove 25s linear infinite;
+}
+
+.cloud2{
+width:140px;
+height:70px;
+top:120px;
+left:-300px;
+animation:cloudMove 35s linear infinite;
 }
 
 .cloud::before,
@@ -47,21 +63,24 @@ background:white;
 border-radius:50%;
 }
 
-.cloud1{
-width:120px;
-height:60px;
-top:50px;
-left:-150px;
+.cloud::before{
+width:80px;
+height:80px;
+top:-40px;
+left:30px;
 }
 
-.cloud1::before{width:60px;height:60px;left:20px;top:-30px;}
-.cloud1::after{width:70px;height:70px;left:50px;top:-20px;}
+.cloud::after{
+width:90px;
+height:90px;
+top:-30px;
+left:70px;
+}
 
 @keyframes cloudMove{
 from{transform:translateX(0);}
-to{transform:translateX(120vw);}
+to{transform:translateX(140vw);}
 }
-
 /* ROAD */
 .road-svg{
 position:absolute;
@@ -76,8 +95,11 @@ filter:drop-shadow(0 25px 40px rgba(0,0,0,0.3));
 position:absolute;
 width:110px;
 height:55px;
-transform:translate(-50%, -50%);
-transition:transform 0.5s cubic-bezier(.65,.05,.36,1);
+
+/* 🔥 center properly on path */
+transform:translate(-50%, -80%);
+transition:transform 0.6s cubic-bezier(.65,.05,.36,1);
+pointer-events:none;
 }
 
 /* BODY */
@@ -154,75 +176,74 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 padding:40px;
-position:relative;
+background:linear-gradient(135deg,#ffffff,#f8fafc);
 }
 
-/* 💎 FLOATING GLASS CARD */
-.popup::before{
-content:"";
-position:absolute;
-width:80%;
-height:80%;
-background:rgba(255,255,255,0.6);
-backdrop-filter:blur(25px);
-border-radius:25px;
-box-shadow:0 25px 60px rgba(0,0,0,0.2);
-z-index:0;
-animation:floatCard 6s ease-in-out infinite;
+/* 💎 CARD */
+.popup-card{
+width:100%;
+max-width:550px;
+padding:35px;
+border-radius:20px;
+background:rgba(255,255,255,0.7);
+backdrop-filter:blur(20px);
+box-shadow:
+0 20px 50px rgba(0,0,0,0.1),
+inset 0 1px 1px rgba(255,255,255,0.6);
+animation:fadeUp 0.6s ease;
 }
 
-@keyframes floatCard{
-0%,100%{transform:translateY(0);}
-50%{transform:translateY(-10px);}
+@keyframes fadeUp{
+from{
+opacity:0;
+transform:translateY(20px);
 }
-
-.popup h3,
-.popup p,
-.nav-btns{
-position:relative;
-z-index:1;
+to{
+opacity:1;
+transform:translateY(0);
+}
 }
 
 .popup h3{
-font-size:28px;
+font-size:26px;
 margin-bottom:15px;
 color:#ef4444;
+font-weight:600;
 }
 
 .popup p{
 font-size:15px;
-line-height:1.8;
-max-width:500px;
+line-height:1.9;
+color:#374151;
 max-height:350px;
 overflow-y:auto;
-color:#1f2937;
+white-space:pre-line;
 }
 
 /* BUTTONS */
 .nav-btns{
-margin-top:30px;
+margin-top:25px;
 display:flex;
-gap:15px;
-width:100%;
-max-width:400px;
+gap:12px;
 }
 
 .nav-btns button{
 flex:1;
-padding:14px;
+padding:12px;
 border:none;
-border-radius:12px;
-background:linear-gradient(135deg,#ef4444,#dc2626);
+border-radius:10px;
+background:#ef4444;
 color:white;
 font-weight:600;
 cursor:pointer;
-transition:all 0.3s ease;
-box-shadow:0 15px 35px rgba(239,68,68,0.4);
+transition:0.3s;
 }
 
 .nav-btns button:hover{
-transform:translateY(-4px) scale(1.05);
+transform:translateY(-2px);
+background:#dc2626;
 }
+
 
 /* SCROLLBAR */
 .popup p::-webkit-scrollbar{
