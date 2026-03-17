@@ -58,6 +58,19 @@ desc: "Thank you for exploring my portfolio.\n\nThis journey represents my growt
 }
 
 ];
+// CREATE DOTS
+const dotsContainer = document.getElementById("progressDots");
+
+data.forEach((_, i) => {
+  const dot = document.createElement("div");
+  dot.classList.add("dot");
+
+  dot.addEventListener("click", () => {
+    goToStop(i);
+  });
+
+  dotsContainer.appendChild(dot);
+});
 
 // MOVE BUS
 function goToStop(index){
