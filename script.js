@@ -6,8 +6,9 @@ const title = document.getElementById("title");
 const desc = document.getElementById("desc");
 
 let current = 0;
+let typingTimeout;
 
-/* 🔥 FULL DATA (YOUR COMPLETE CONTENT) */
+/* 🔥 YOUR FULL DATA (UNCHANGED) */
 const data = [
 
 `Pradeep . M
@@ -130,7 +131,25 @@ Excited for future opportunities and challenges ahead.`
 
 ];
 
-/* MAIN FUNCTION */
+/* ✨ TYPEWRITER EFFECT */
+function typeText(text){
+  clearTimeout(typingTimeout);
+  desc.innerHTML = "";
+
+  let i = 0;
+
+  function typing(){
+    if(i < text.length){
+      desc.innerHTML += text.charAt(i);
+      i++;
+      typingTimeout = setTimeout(typing, 12); // speed
+    }
+  }
+
+  typing();
+}
+
+/* 🚀 MOVE FUNCTION */
 function goToStop(i){
   if(i < 0 || i >= stops.length) return;
 
@@ -138,17 +157,22 @@ function goToStop(i){
 
   let pos = stops[i].style.left;
 
+  // smooth movement
   bus.style.left = pos;
   progress.style.width = pos;
 
+  // active highlight
   stops.forEach(s => s.classList.remove("active"));
   stops[i].classList.add("active");
 
+  // update content
   title.innerText = stops[i].innerText;
-  desc.innerText = data[i];
+
+  // 🔥 typing animation instead of instant text
+  typeText(data[i]);
 }
 
-/* NAVIGATION */
+/* ⬅➡ NAVIGATION */
 function nextStop(){
   goToStop(current + 1);
 }
@@ -157,10 +181,12 @@ function prevStop(){
   goToStop(current - 1);
 }
 
-/* CLICK SUPPORT */
+/* 🖱 CLICK SUPPORT */
 stops.forEach((s, i)=>{
-  s.onclick = () => goToStop(i);
+  s.addEventListener("click", () => goToStop(i));
 });
 
-/* INIT */
-window.onload = () => goToStop(0);
+/* 🎬 INIT */
+window.onload = () => {
+  goToStop(0);
+};
