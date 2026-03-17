@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Pradeep Portfolio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<section class="hero">
+  <h1>Pradeep . M</h1>
+  <p>B.E (Hons) Electronics & Communication Engineering</p>
+</section>
+
+<section class="journey">
+
+<h2>My Journey 🚀</h2>
+
+<div class="road-container">
+
+  <div class="road-bg"></div>
+  <div class="progress" id="progress"></div>
+
+  <div class="bus" id="bus">
+    <div class="bus-body"></div>
+    <div class="wheel wheel1"></div>
+    <div class="wheel wheel2"></div>
+  </div>
+
+  <!-- 10 STOPS -->
+  <div class="stop" style="left:5%">Intro</div>
+  <div class="stop" style="left:15%">Objective</div>
+  <div class="stop" style="left:25%">Education</div>
+  <div class="stop" style="left:35%">Skills</div>
+  <div class="stop" style="left:45%">Experience</div>
+  <div class="stop" style="left:55%">Projects</div>
+  <div class="stop" style="left:65%">Certificates</div>
+  <div class="stop" style="left:75%">Contact</div>
+  <div class="stop" style="left:85%">Languages</div>
+  <div class="stop" style="left:95%">Finish</div>
+
+</div>
+
+<!-- NAV BUTTONS -->
+<div class="controls">
+  <button onclick="prevStop()">⬅ Previous</button>
+  <button onclick="nextStop()">Next ➡</button>
+</div>
+
+</section>
+
+<!-- POPUP -->
+<div id="popup" class="popup">
+  <div class="popup-content">
+    <span id="close">&times;</span>
+    <h3 id="title"></h3>
+    <p id="desc"></p>
+  </div>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
