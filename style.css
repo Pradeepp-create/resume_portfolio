@@ -1,570 +1,525 @@
-/* ------------------------------
-   ULTRA-PRO STYLESHEET — PREMIUM
-   Replace your existing style.css
-   ------------------------------ */
-
-/* Fonts + reset */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
-
-:root{
-  --bg-1: #f0f9ff;       /* sky top */
-  --bg-2: #e6f6ff;       /* sky mid */
-  --accent: #ef4444;     /* red accent */
-  --accent-2: #dc2626;
-  --muted: #6b7280;
-  --card-bg: rgba(255,255,255,0.7);
-  --glass-blur: 14px;
-  --max-width: 1200px;
-  --ease-strong: cubic-bezier(.22,.9,.3,1);
+/* style.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-*{box-sizing: border-box; margin:0; padding:0;}
-html,body{height:100%; width:100%;}
-body{
-  font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  background: linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 60%, #ffffff 100%);
-  color: #0f172a;
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-  overflow:hidden;
-  min-height:100vh;
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    overflow: hidden;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    height: 100vh;
 }
 
-/* ---------- layout ---------- */
-.journey{
-  width:100%;
-  max-width:var(--max-width);
-  margin: 0 auto;
-  height:100vh;
-  display:flex;
-  gap:28px;
-  align-items:stretch;
-  padding:28px;
-  /* center on large screens */
+.journey-container {
+    display: flex;
+    height: 100vh;
+    position: relative;
 }
 
-/* left: visual stage (road + bus + clouds) */
-.road-container{
-  width:52%;
-  min-width:480px;
-  height:calc(100vh - 56px);
-  position:relative;
-  border-radius:20px;
-  overflow:hidden;
-  box-shadow: 0 20px 60px rgba(2,6,23,0.06);
-  background: linear-gradient(180deg, rgba(255,255,255,0.6) 0%, rgba(245,248,255,0.2) 100%);
-  border: 1px solid rgba(15,23,42,0.03);
+/* LEFT SIDE - ROAD SCENE */
+.left-scene {
+    flex: 1;
+    position: relative;
+    background: linear-gradient(to bottom, #87CEEB 0%, #98D8E8 50%, #E0F6FF 100%);
+    overflow: hidden;
 }
 
-/* right: content / popup stage */
-.popup{
-  width:48%;
-  height:calc(100vh - 56px);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  position:relative;
+.sky {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60%;
+    background: linear-gradient(to bottom, #87CEEB 0%, #B8E6FF 100%);
 }
 
-/* ---------- SKY + PARALLAX CLOUDS ---------- */
-/* container for cloud layers for JS-free parallax */
-.cloud-layer{
-  position:absolute;
-  width:200%;
-  height:50%;
-  left:-20%;
-  top:0;
-  pointer-events:none;
+.road-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 200%;
+    height: 50%;
+    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* many cloud elements in HTML are recommended:
-   <div class="cloud cloud--lg" style="--x:10%; --y:5%; --delay:0s;"></div>
-   We'll provide default clouds below. */
-.cloud{
-  position:absolute;
-  background: linear-gradient(180deg, #ffffff 0%, #f6f9ff 100%);
-  border-radius:999px;
-  filter: blur(2px) drop-shadow(0 12px 30px rgba(2,6,23,0.06));
-  opacity: 0.95;
-  transform: translate3d(0,0,0);
-  will-change: transform;
+.road {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, #333 0%, #444 50%, #555 100%);
+    border-radius: 0 0 200px 200px / 0 0 100px 100px;
 }
 
-/* size variants */
-.cloud--xl{ width:420px; height:140px; }
-.cloud--lg{ width:320px; height:110px; }
-.cloud--md{ width:220px; height:80px; }
-.cloud--sm{ width:140px; height:56px; }
-
-/* soft pill shapes using pseudo elements */
-.cloud::before,
-.cloud::after{
-  content:"";
-  position:absolute;
-  background:inherit;
-  border-radius:inherit;
-  filter: blur(1px);
-}
-.cloud::before{ width:40%; height:100%; left:-12%; top:-8%; }
-.cloud::after{ width:34%; height:90%; right:-10%; bottom:-6%; }
-
-/* animated drives across the stage (different speed per class) */
-@keyframes cloud-slide-slow { from{transform:translateX(-40vw);} to{transform:translateX(120vw);} }
-@keyframes cloud-slide-mid  { from{transform:translateX(-60vw);} to{transform:translateX(100vw);} }
-@keyframes cloud-slide-fast { from{transform:translateX(-80vw);} to{transform:translateX(80vw);} }
-
-.cloud--xl { animation: cloud-slide-slow 48s linear infinite; top:18%; left:-30%; }
-.cloud--lg { animation: cloud-slide-mid 36s linear infinite; top:8%; left:-40%; opacity:.95; }
-.cloud--md { animation: cloud-slide-mid 34s linear infinite; top:18%; left:-35%; opacity:.95; }
-.cloud--sm { animation: cloud-slide-fast 28s linear infinite; top:30%; left:-25%; opacity:.92; }
-
-/* ---------- SVG ROAD ---------- */
-.road-svg{
-  position:absolute;
-  bottom:-10px;    /* small overlap */
-  width:130%;
-  left:-15%;
-  height:auto;
-  pointer-events:none;
-  mix-blend-mode:multiply;
-  filter: drop-shadow(0 20px 35px rgba(2,6,23,0.25));
+.road-lines {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 200%;
+    height: 4px;
+    background: repeating-linear-gradient(
+        to right,
+        transparent 0,
+        transparent 48px,
+        #fff 48px,
+        #fff 52px
+    );
+    animation: lineMove 20s linear infinite;
 }
 
-/* style the main stroke so it looks like asphalt with edges */
-#roadPath{
-  stroke: #0b1220;       /* deep road color */
-  stroke-width: 72;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  fill:none;
-  paint-order:stroke;
-  filter: drop-shadow(0 16px 26px rgba(2,6,23,0.2));
+@keyframes lineMove {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-104px); }
 }
 
-/* dashed center line (yellow/white depending look) */
-.road-svg .road-dash{
-  stroke: #ffffff;
-  stroke-width: 6;
-  stroke-dasharray: 24 18;
-  stroke-linecap:round;
-  fill:none;
-  opacity:0.95;
-  filter: drop-shadow(0 6px 18px rgba(255,255,255,0.06));
+/* BUS */
+.bus {
+    position: absolute;
+    left: 15%;
+    bottom: 25%;
+    z-index: 10;
 }
 
-/* subtle side highlights to make road 3d */
-.road-svg .road-edge{
-  stroke: rgba(255,255,255,0.03);
-  stroke-width: 2;
-  fill:none;
+.bus-body {
+    width: 140px;
+    height: 80px;
+    background: linear-gradient(145deg, #ff4757, #ff3742);
+    border-radius: 20px 20px 5px 5px;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(255, 71, 87, 0.3);
 }
 
-/* ---------- BUS (modern, detailed) ---------- */
-/* the JS will set inline transform to a pixel translation and rotation.
-   We expect transform to look like: translate(Xpx, Ypx) translate(-50%,-70%) rotate(angledeg)
-   BUT JS might overwrite transform; to ensure proper centering we will instruct a small JS tweak below.
-*/
-
-/* bus wrapper */
-#bus{
-  position:absolute;
-  width:130px;
-  height:60px;
-  pointer-events:none;
-  transform-origin: center center;
-  will-change: transform;
-  z-index: 40;
-  /* slight entrance */
-  transition: transform 450ms var(--ease-strong);
+.bus-windows {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    display: flex;
+    gap: 8px;
 }
 
-/* actual body */
-.bus-body{
-  width:100%;
-  height:100%;
-  border-radius:14px;
-  background: linear-gradient(180deg, #ffffff 0%, #f3f4f6 10%, #ef4444 35%, #b91c1c 100%);
-  background-size: 200% 200%;
-  /* create two-tone body with stripe */
-  position:relative;
-  overflow:visible;
-  box-shadow: 0 18px 50px rgba(11,20,33,0.28);
-  display:block;
+.bus-windows::before,
+.bus-windows::after {
+    content: '';
+    width: 25px;
+    height: 30px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 5px;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
 }
 
-/* front glass */
-.bus-body::before{
-  content:"";
-  position:absolute;
-  left:12px;
-  right:12px;
-  top:8px;
-  height:18px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.85));
-  border-radius:6px;
-  box-shadow: 0 4px 18px rgba(2,6,23,0.06) inset;
+.bus-headlights {
+    position: absolute;
+    top: 30px;
+    right: 15px;
+    width: 12px;
+    height: 12px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
 }
 
-/* side stripe decoration */
-.bus-body::after{
-  content:"";
-  position:absolute;
-  height:50%;
-  width:38%;
-  right:10px;
-  top:26%;
-  background: linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0.18));
-  border-radius:6px;
-  transform:skewX(-12deg);
-  opacity:0.9;
+.bus-headlights::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 8px;
+    height: 8px;
+    background: #ffeb3b;
+    border-radius: 50%;
 }
 
-/* wheels */
-.wheel{
-  position:absolute;
-  width:22px;
-  height:22px;
-  border-radius:50%;
-  background: radial-gradient(circle at 30% 30%, #3b3b3b, #111 75%);
-  bottom:-12px;
-  box-shadow: 0 8px 20px rgba(3,7,18,0.45);
-  will-change: transform;
-}
-.wheel1{ left:14px; }
-.wheel2{ right:14px; }
-
-/* wheel rotation handled by css animation; JS should not stop it */
-@keyframes wheel-spin { to { transform: rotate(360deg); } }
-.wheel{ animation: wheel-spin 0.45s linear infinite; }
-
-/* micro shadow under bus to stick to road */
-.bus-shadow{
-  position:absolute;
-  left:50%;
-  transform:translateX(-50%);
-  bottom: -6px;
-  width:120px;
-  height:28px;
-  border-radius:50%;
-  background: radial-gradient(ellipse at center, rgba(2,6,23,0.28) 0%, rgba(2,6,23,0.08) 50%, rgba(2,6,23,0.00) 100%);
-  filter: blur(6px);
-  z-index: 35;
+.bus-wheel {
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #333;
+    bottom: -18px;
+    animation: wheelRotate 2s linear infinite;
 }
 
-/* slight bounce while moving */
-@keyframes bus-bob {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
-  100% { transform: translateY(0); }
+.wheel-rim {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    right: 6px;
+    bottom: 6px;
+    background: #666;
+    border-radius: 50%;
 }
 
-/* when moving (add active class via js if needed) */
-#bus.moving .bus-body { animation: bus-bob 3s ease-in-out infinite; }
-
-/* ---------- STOPS (station markers) ---------- */
-/* Each .stop is absolutely positioned using inline style left:XX% (keeps old JS usage) */
-.stop{
-  position:absolute;
-  bottom:56px;
-  transform: translateX(-50%);
-  min-width:84px;
-  padding:9px 12px;
-  border-radius:999px;
-  background: linear-gradient(180deg, #ffffff, #fffefe);
-  color:#111827;
-  border:1px solid rgba(2,6,23,0.06);
-  box-shadow: 0 8px 20px rgba(6,8,15,0.06);
-  font-size:13px;
-  font-weight:500;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-  transition: transform 220ms var(--ease-strong), box-shadow 220ms;
-  z-index: 30;
+.wheel-tire {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
+    background: radial-gradient(circle at 30% 30%, #222 0%, #111 70%);
+    border-radius: 50%;
 }
 
-/* left icon pin */
-.stop .stop-icon{
-  display:inline-flex;
-  width:18px;
-  height:18px;
-  border-radius:4px;
-  align-items:center;
-  justify-content:center;
-  font-size:12px;
-  color:#ef4444;
-  background: linear-gradient(180deg, rgba(239,68,68,0.08), rgba(239,68,68,0.02));
-  border: 1px solid rgba(239,68,68,0.12);
+.front-wheel {
+    left: 20px;
 }
 
-/* neutral hover */
-.stop:hover{
-  transform: translateX(-50%) translateY(-8px) scale(1.06);
-  box-shadow: 0 18px 40px rgba(6,8,15,0.14);
+.rear-wheel {
+    left: 80px;
 }
 
-/* active station is accent */
-.stop.active{
-  background: linear-gradient(90deg, var(--accent), var(--accent-2));
-  color:white;
-  transform: translateX(-50%) translateY(-10px) scale(1.14);
-  box-shadow: 0 24px 60px rgba(239,68,68,0.24);
+@keyframes wheelRotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
-/* small pointer under stop (station post) */
-.stop::after{
-  content:"";
-  position:absolute;
-  top:100%;
-  left:50%;
-  transform:translateX(-50%);
-  width:6px;
-  height:14px;
-  background: linear-gradient(180deg,#ef4444,#b91c1c);
-  border-radius:3px;
-  box-shadow:0 6px 12px rgba(0,0,0,0.15);
+/* PROGRESS BAR */
+.progress-container {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    z-index: 20;
 }
 
-/* ---------- RIGHT SIDE — popup card (detailed) ---------- */
-.popup-card{
-  width:92%;
-  max-width:640px;
-  padding:34px;
-  border-radius:20px;
-  background: var(--card-bg);
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-  box-shadow: 0 30px 80px rgba(2,6,23,0.08), inset 0 1px 0 rgba(255,255,255,0.6);
-  display:flex;
-  flex-direction:column;
-  gap:18px;
-  z-index:60;
+.progress-bar {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 20px;
 }
 
-/* header row with avatar + title + small meta */
-.popup-header{
-  display:flex;
-  gap:18px;
-  align-items:center;
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #ff4757, #ff6b7a);
+    width: 10%;
+    border-radius: 3px;
+    transition: width 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 0 20px rgba(255, 71, 87, 0.5);
 }
 
-/* little avatar placeholder (replace with img if needed) */
-.popup-avatar{
-  width:68px;
-  height:68px;
-  border-radius:12px;
-  background: linear-gradient(180deg,#fff,#f1f5f9);
-  box-shadow: 0 8px 20px rgba(2,6,23,0.06);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:700;
-  color:var(--accent);
-  font-size:20px;
-  border:1px solid rgba(2,6,23,0.04);
+.progress-dots {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
 }
 
-/* title */
-.popup h3{
-  margin:0;
-  font-size:22px;
-  color: #0b1220;
-  letter-spacing:0.1px;
+.dot {
+    width: 12px;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
 }
 
-/* meta subline */
-.popup-sub{
-  font-size:13px;
-  color:var(--muted);
+.dot.active,
+.dot:hover {
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(145deg, #ff4757, #ff6b7a);
+    box-shadow: 0 0 20px rgba(255, 71, 87, 0.6);
 }
 
-/* large content area (scrollable) */
-.popup-body{
-  font-size:15px;
-  color:#0f172a;
-  line-height:1.7;
-  max-height:380px;
-  overflow-y:auto;
-  white-space:pre-line; /* preserve newlines */
-  padding-right:6px;
+/* RIGHT SIDE - CONTENT */
+.right-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    position: relative;
 }
 
-/* scrollbar styling */
-.popup-body::-webkit-scrollbar{ width:8px; }
-.popup-body::-webkit-scrollbar-thumb{
-  background: linear-gradient(180deg,var(--accent),var(--accent-2));
-  border-radius:10px;
+.glass-card {
+    width: 100%;
+    max-width: 600px;
+    height: 85vh;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(20px);
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.1),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
+    padding: 60px 40px;
+    position: relative;
+    overflow: hidden;
 }
 
-/* extras row: icons + chips */
-.popup-chips{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-}
-.chip{
-  background: #fff;
-  border-radius:999px;
-  padding:8px 12px;
-  font-size:13px;
-  border:1px solid rgba(2,6,23,0.04);
-  color:#0f172a;
+.glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
 }
 
-/* nav buttons */
-.nav-btns{
-  display:flex;
-  gap:12px;
-  margin-top:6px;
-}
-.nav-btns button{
-  padding:12px 18px;
-  border-radius:10px;
-  border:none;
-  background: linear-gradient(90deg,var(--accent),var(--accent-2));
-  color:white;
-  font-weight:600;
-  cursor:pointer;
-  box-shadow: 0 12px 36px rgba(239,68,68,0.18);
-  transition: transform 160ms var(--ease-strong), box-shadow 160ms;
-}
-.nav-btns button:hover{
-  transform: translateY(-4px) scale(1.02);
+.content-section {
+    display: none;
+    animation: fadeInUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    height: 100%;
 }
 
-/* small subtle microcopy under card */
-.popup-footer{
-  font-size:12px;
-  color:var(--muted);
-  margin-top:6px;
-  opacity:0.9;
+.content-section.active {
+    display: block;
 }
 
-/* ---------- RESPONSIVE ---------- */
-@media (max-width:1100px){
-  .journey{ padding:20px; gap:18px; }
-  .road-container{ width:54%; min-width:420px; }
-  .popup{ width:46%; }
-}
-@media (max-width:900px){
-  .journey{ flex-direction:column; gap:18px; height:auto; padding:16px; }
-  .road-container{ width:100%; height:46vh; border-radius:14px; min-width:0; }
-  .popup{ width:100%; height:auto; align-items:stretch; justify-content:flex-start; padding:20px; }
-  .popup-card{ width:100%; max-width:100%; padding:20px; }
-  .cloud--xl, .cloud--lg{ display:none; } /* hide big clouds for mobile */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-/* ---------- FINISH TOUCHES: transitions & utility ---------- */
-.fade-in {
-  animation: fadeInUp 420ms cubic-bezier(.16,1,.3,1) both;
-}
-@keyframes fadeInUp{
-  from{ opacity:0; transform: translateY(8px); }
-  to{ opacity:1; transform: translateY(0); }
-}
-
-/* nice pointer for stops */
-.stop:focus { outline: 3px solid rgba(239,68,68,0.18); }
-
-/* end of stylesheet */
-/* spread stops properly */
-.stop{
-  min-width: 110px;
-  text-align: center;
-  white-space: nowrap;
-  font-size: 14px;
-  padding: 10px 16px;
+h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #ff4757, #ff6b7a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 10px;
+    line-height: 1.1;
 }
 
-/* push stops slightly upward */
-.stop{
-  bottom: 80px;
-}
-/* highlight active stop better */
-.stop.active{
-  transform: translateX(-50%) translateY(-12px) scale(1.2);
+h2 {
+    font-size: 1.3rem;
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 20px;
 }
 
-/* subtle glow */
-.stop.active::before{
-  content:"";
-  position:absolute;
-  width:100%;
-  height:100%;
-  border-radius:20px;
-  background: rgba(239,68,68,0.2);
-  z-index:-1;
-}
-/* ===== PROGRESS BAR ===== */
-
-.progress-bar{
-  position:absolute;
-  bottom:20px;
-  left:50%;
-  transform:translateX(-50%);
-  width:80%;
-  height:6px;
-  background: rgba(0,0,0,0.1);
-  border-radius:10px;
-  overflow:hidden;
-  z-index:20;
+h3, h4 {
+    color: #333;
+    margin-bottom: 8px;
 }
 
-/* animated fill */
-.progress-fill{
-  height:100%;
-  width:0%;
-  background: linear-gradient(90deg,#ef4444,#dc2626);
-  border-radius:10px;
-  transition: width 0.6s ease;
+p {
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 15px;
 }
 
-/* glow effect */
-.progress-fill::after{
-  content:"";
-  position:absolute;
-  right:0;
-  top:0;
-  width:40px;
-  height:100%;
-  background: rgba(255,255,255,0.4);
-  filter: blur(6px);
+.location {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
-/* ===== DOTS ===== */
-
-.progress-dots{
-  position:absolute;
-  bottom:10px;
-  left:50%;
-  transform:translateX(-50%);
-  display:flex;
-  gap:12px;
-  z-index:25;
+.welcome {
+    font-size: 1.2rem;
+    color: #444;
+    font-weight: 500;
+    margin-bottom: 10px;
 }
 
-/* each dot */
-.dot{
-  width:10px;
-  height:10px;
-  border-radius:50%;
-  background: rgba(0,0,0,0.25);
-  cursor:pointer;
-  transition: all 0.3s ease;
+ul {
+    list-style: none;
+    padding-left: 0;
 }
 
-/* hover */
-.dot:hover{
-  transform: scale(1.4);
-  background:#ef4444;
+ul li {
+    padding: 8px 0;
+    color: #555;
+    position: relative;
+    padding-left: 25px;
 }
 
-/* active dot */
-.dot.active{
-  width:18px;
-  border-radius:10px;
-  background: linear-gradient(90deg,#ef4444,#dc2626);
-  box-shadow: 0 4px 14px rgba(239,68,68,0.5);
+ul li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: #ff4757;
+    font-weight: bold;
+}
+
+.skills-grid, .tech-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.skill-category, .tech-category {
+    background: rgba(255, 255, 255, 0.5);
+    padding: 20px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+}
+
+.skill-category h4, .tech-category h4 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.skill-category span, .tech-category span {
+    display: inline-block;
+    background: linear-gradient(135deg, rgba(255, 71, 87, 0.2), rgba(255, 107, 122, 0.2));
+    padding: 6px 12px;
+    margin: 4px 4px 4px 0;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    color: #333;
+    border: 1px solid rgba(255, 71, 87, 0.3);
+}
+
+.education-item, .experience-item, .project-item {
+    background: rgba(255, 255, 255, 0.3);
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    border-left: 4px solid #ff4757;
+}
+
+.cert-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.cert-list li {
+    background: rgba(255, 255, 255, 0.3);
+    padding: 12px 16px;
+    border-radius: 10px;
+    padding-left: 25px;
+    position: relative;
+}
+
+.cert-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 8px;
+    color: #27ae60;
+    font-weight: bold;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 25px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.3);
+    text-decoration: none;
+    color: #333;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.contact-item:hover {
+    background: linear-gradient(135deg, rgba(255, 71, 87, 0.1), rgba(255, 107, 122, 0.1));
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(255, 71, 87, 0.2);
+}
+
+.contact-item i {
+    width: 24px;
+    font-size: 1.2rem;
+    color: #ff4757;
+}
+
+.closing-message {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.closing-message p {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+/* NAVIGATION BUTTONS */
+.nav-buttons {
+    position: absolute;
+    bottom: 40px;
+    left: 40px;
+    right: 40px;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-btn {
+    flex: 1;
+    padding: 16px 24px;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    backdrop-filter: blur(10px);
+}
+
+.prev-btn {
+    background: rgba(255, 255, 255, 0.3);
+    color: #333;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.next-btn {
+    background: linear-gradient(135deg, #ff4757, #ff6b7a);
+    color: white;
+    box-shadow: 0 10px 25px rgba(255, 71, 87, 0.4);
+}
+
+.nav-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.prev-btn:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.next-btn:hover {
+    box-shadow: 0 20px 40px rgba(255, 71, 87, 0.5);
+}
+
+/* RESPONSIVE */
+@media (max-width: 1200px) {
+    .glass-card {
+        margin: 20px;
+        height: 90vh;
+    }
+    
+    .nav-buttons {
+        bottom: 20px;
+        left: 20px;
+        right: 20px;
+    }
+}
+
+@media (max-height: 800px) {
+    .glass-card {
+        height: 90vh;
+        padding: 40px 30px;
+    }
 }
