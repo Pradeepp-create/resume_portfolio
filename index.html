@@ -1,65 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pradeep · Journey Resume</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pradeep M · Journey Portfolio</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="journey-container">
-    <!-- LEFT SIDE: Road & Bus -->
+    <!-- LEFT: Road + Bus -->
     <div class="left-side">
-      <div class="sky"></div>
-      <div class="cloud cloud-1"></div>
-      <div class="cloud cloud-2"></div>
+      <div class="environment">
+        <div class="sky"></div>
+        <div class="clouds">
+          <div class="cloud cloud1"></div>
+          <div class="cloud cloud2"></div>
+          <div class="cloud cloud3"></div>
+        </div>
+      </div>
 
-      <div class="road-container">
+      <div class="road-wrapper">
         <div class="road" id="road">
-          <!-- Stops -->
-          <div class="stop" data-section="intro"></div>
-          <div class="stop" data-section="objective"></div>
-          <div class="stop" data-section="education"></div>
-          <div class="stop" data-section="skills"></div>
-          <div class="stop" data-section="experience"></div>
-          <div class="stop" data-section="projects"></div>
-          <div class="stop" data-section="certificates"></div>
-          <div class="stop" data-section="contact"></div>
-          <div class="stop" data-section="technical"></div>
-          <div class="stop" data-section="journey-complete"></div>
+          <!-- 10 Bus Stops -->
+          <div class="stop active" data-section="0"></div>
+          <div class="stop" data-section="1"></div>
+          <div class="stop" data-section="2"></div>
+          <div class="stop" data-section="3"></div>
+          <div class="stop" data-section="4"></div>
+          <div class="stop" data-section="5"></div>
+          <div class="stop" data-section="6"></div>
+          <div class="stop" data-section="7"></div>
+          <div class="stop" data-section="8"></div>
+          <div class="stop" data-section="9"></div>
         </div>
       </div>
 
-      <div class="bus">
-        <div class="bus-body">
-          <div class="window"></div>
-          <div class="window"></div>
-          <div class="window"></div>
-          <div class="window window-small"></div>
+      <!-- REALISTIC BUS -->
+      <div class="bus" id="bus">
+        <div class="bus-main">
+          <div class="bus-windows">
+            <div class="window"></div>
+            <div class="window"></div>
+            <div class="window"></div>
+          </div>
+          <div class="bus-roof"></div>
         </div>
-        <div class="wheel wheel-left"></div>
-        <div class="wheel wheel-right"></div>
+        <div class="wheel front-wheel"></div>
+        <div class="wheel rear-wheel"></div>
       </div>
 
-      <!-- Progress bar -->
-      <div class="progress-container">
-        <div class="progress-bar" id="progress-bar"></div>
-        <div class="progress-dots" id="dots"></div>
+      <!-- Progress -->
+      <div class="progress-section">
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="progress-dots" id="progressDots"></div>
       </div>
     </div>
 
-    <!-- RIGHT SIDE: Popup Card -->
+    <!-- RIGHT: Popup Card -->
     <div class="right-side">
-      <div class="card" id="card">
-        <div class="card-content">
-          <h2 id="card-title">Intro</h2>
-          <div id="card-text"></两位 onclick="nextSection()">Next</div>
+      <div class="glass-card" id="glassCard">
+        <div class="card-header">
+          <h1 id="cardTitle">Welcome to My Journey</h1>
+          <div class="section-number" id="sectionNum">Stop 1/10</div>
+        </div>
+        <div class="card-content" id="cardContent">
+          <!-- Content loads here -->
         </div>
       </div>
-
-      <div class="card-buttons">
-        <button id="prev-btn" class="nav-btn">← Previous</button>
-        <button id="next-btn" class="nav-btn">Next →</button>
+      
+      <!-- Navigation Buttons -->
+      <div class="nav-buttons">
+        <button id="prevBtn" class="nav-btn disabled">← Previous Stop</button>
+        <button id="nextBtn" class="nav-btn">Next Stop →</button>
       </div>
     </div>
   </div>
