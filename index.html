@@ -3,203 +3,243 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pradeep M - Developer Portfolio</title>
+    <title>Pradeep M - Busfolio</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <div class="journey-container">
-        <!-- Left Side - Road & Bus -->
-        <div class="left-scene">
-            <div class="sky"></div>
-            <div class="road-container">
-                <div class="road"></div>
-                <div class="road-lines"></div>
-            </div>
-            <div class="bus">
-                <div class="bus-body">
-                    <div class="bus-windows"></div>
-                    <div class="bus-headlights"></div>
-                </div>
-                <div class="bus-wheel front-wheel">
-                    <div class="wheel-rim"></div>
-                    <div class="wheel-tire"></div>
-                </div>
-                <div class="bus-wheel rear-wheel">
-                    <div class="wheel-rim"></div>
-                    <div class="wheel-tire"></div>
-                </div>
-            </div>
-            <div class="progress-container">
-                <div class="progress-bar">
-                    <div class="progress-fill"></div>
-                </div>
-                <div class="progress-dots">
-                    <span class="dot active" data-section="0"></span>
-                    <span class="dot" data-section="1"></span>
-                    <span class="dot" data-section="2"></span>
-                    <span class="dot" data-section="3"></span>
-                    <span class="dot" data-section="4"></span>
-                    <span class="dot" data-section="5"></span>
-                    <span class="dot" data-section="6"></span>
-                    <span class="dot" data-section="7"></span>
-                    <span class="dot" data-section="8"></span>
-                    <span class="dot" data-section="9"></span>
-                </div>
+    <div class="app">
+        <!-- Journey Track -->
+        <div class="journey-track">
+            <div class="track-line"></div>
+            <div class="track-stops">
+                <div class="stop active" data-stop="0"></div>
+                <div class="stop" data-stop="1"></div>
+                <div class="stop" data-stop="2"></div>
+                <div class="stop" data-stop="3"></div>
+                <div class="stop" data-stop="4"></div>
+                <div class="stop" data-stop="5"></div>
+                <div class="stop" data-stop="6"></div>
+                <div class="stop" data-stop="7"></div>
+                <div class="stop" data-stop="8"></div>
+                <div class="stop" data-stop="9"></div>
             </div>
         </div>
 
-        <!-- Right Side - Content Card -->
-        <div class="right-content">
-            <div class="glass-card">
-                <div class="content-section active" data-section="0">
-                    <h1>Pradeep M</h1>
-                    <h2>B.E (Hons) Electronics and Communication Engineering</h2>
-                    <p class="location"><i class="fas fa-map-marker-alt"></i> Sriperumbudur (near toll plaza)</p>
-                    <p class="welcome">Passionate tech enthusiast turning code into real-world solutions.</p>
-                    <p class="welcome">Ready to drive innovation with cutting-edge skills 🚀</p>
+        <!-- Bus -->
+        <div class="bus-container">
+            <div class="bus" id="bus">
+                <div class="bus-body">
+                    <div class="bus-roof"></div>
+                    <div class="bus-windows">
+                        <div class="window"></div>
+                        <div class="window"></div>
+                        <div class="window"></div>
+                    </div>
+                    <div class="bus-front">
+                        <div class="headlight"></div>
+                        <div class="headlight"></div>
+                        <div class="grille"></div>
+                    </div>
                 </div>
-
-                <div class="content-section" data-section="1">
-                    <h1>Career Objective</h1>
-                    <p>Tech-driven engineer with strong passion for innovation and problem-solving.</p>
-                    <ul>
-                        <li>Excellent time management & team collaboration</li>
-                        <li>Seeking challenging opportunities in tech</li>
-                        <li>Skilled in: Python • Cloud Computing • Marketing • Website Building</li>
-                    </ul>
+                <div class="bus-wheels">
+                    <div class="wheel front-wheel">
+                        <div class="wheel-rim"></div>
+                    </div>
+                    <div class="wheel rear-wheel">
+                        <div class="wheel-rim"></div>
+                    </div>
                 </div>
+                <div class="bus-glow"></div>
+            </div>
+        </div>
 
-                <div class="content-section" data-section="2">
-                    <h1>Education</h1>
-                    <div class="education-item">
-                        <h3>B.E (Hons) ECE • 2022–2026</h3>
-                        <p><strong>St. Joseph College of Engineering</strong> • CGPA: 8.5</p>
-                        <p>Specialization: Python, Cloud Computing, Marketing, Website Building</p>
+        <!-- Content Panel -->
+        <div class="content-panel">
+            <div class="panel-inner">
+                <div class="section active" data-section="0">
+                    <div class="hero-content">
+                        <div class="name-badge">
+                            <h1>Pradeep M</h1>
+                            <div class="position">B.E (Hons) Electronics & Communication</div>
+                            <div class="location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                Sriperumbudur, Tamil Nadu
+                            </div>
+                        </div>
+                        <p class="tagline">Building the future, one line of code at a time 🚀</p>
                     </div>
                 </div>
 
-                <div class="content-section" data-section="3">
-                    <h1>Skills</h1>
+                <div class="section" data-section="1">
+                    <h2>Career Objective</h2>
+                    <div class="objective-grid">
+                        <div class="objective-card">
+                            <i class="fas fa-bullseye"></i>
+                            <p>Passionate about technology and innovation</p>
+                        </div>
+                        <div class="objective-card">
+                            <i class="fas fa-clock"></i>
+                            <p>Strong time management & team player</p>
+                        </div>
+                        <div class="objective-card">
+                            <i class="fas fa-rocket"></i>
+                            <p>Seeking opportunities in Python, Cloud, Web Dev</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section" data-section="2">
+                    <h2>Education</h2>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h3>B.E (Hons) ECE • CGPA: 8.5</h3>
+                            <p>St. Joseph College of Engineering</p>
+                            <span class="timeline-date">2022 - 2026</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section" data-section="3">
+                    <h2>Skills</h2>
                     <div class="skills-grid">
-                        <div class="skill-category">
-                            <h4>Web Technologies</h4>
-                            <span>HTML</span><span>CSS</span><span>JavaScript</span>
+                        <div class="skill-group">
+                            <h4>Web Tech</h4>
+                            <span class="skill-tag">HTML</span>
+                            <span class="skill-tag">CSS</span>
+                            <span class="skill-tag">JavaScript</span>
                         </div>
-                        <div class="skill-category">
+                        <div class="skill-group">
                             <h4>Programming</h4>
-                            <span>Python</span><span>Java</span><span>SQL</span>
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">Java</span>
+                            <span class="skill-tag">SQL</span>
                         </div>
-                        <div class="skill-category">
+                        <div class="skill-group">
                             <h4>Tools</h4>
-                            <span>Git</span><span>GitHub</span><span>MATLAB</span>
-                        </div>
-                        <div class="skill-category">
-                            <h4>Soft Skills</h4>
-                            <span>Teamwork</span><span>Creativity</span><span>Adaptability</span>
+                            <span class="skill-tag">Git</span>
+                            <span class="skill-tag">GitHub</span>
+                            <span class="skill-tag">MATLAB</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="content-section" data-section="4">
-                    <h1>Experience</h1>
-                    <div class="experience-item">
-                        <h4>Cloud Computing Internship</h4>
-                        <p>Gateway Software Solutions • July–Aug 2025</p>
-                    </div>
-                    <div class="experience-item">
-                        <h4>Value Added Course</h4>
-                        <p>Best Route Consulting • March 2025</p>
-                    </div>
-                </div>
-
-                <div class="content-section" data-section="5">
-                    <h1>Projects</h1>
-                    <div class="project-item">
-                        <h4>Waste Segregation System</h4>
-                        <p>Smart automation project for efficient waste management</p>
-                    </div>
-                    <div class="project-item">
-                        <h4>Digital Acoustic Signal Processing</h4>
-                        <p>Advanced audio processing and analysis system</p>
-                    </div>
-                    <div class="project-item">
-                        <h4>E-commerce Website</h4>
-                        <p>Fully responsive online shopping platform</p>
+                <div class="section" data-section="4">
+                    <h2>Experience</h2>
+                    <div class="experience-list">
+                        <div class="exp-item">
+                            <div class="exp-header">
+                                <h4>Cloud Computing Internship</h4>
+                                <span>Gateway Software Solutions</span>
+                            </div>
+                            <div class="exp-date">Jul - Aug 2025</div>
+                        </div>
+                        <div class="exp-item">
+                            <div class="exp-header">
+                                <h4>Value Added Course</h4>
+                                <span>Best Route Consulting</span>
+                            </div>
+                            <div class="exp-date">March 2025</div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="content-section" data-section="6">
-                    <h1>Certificates</h1>
-                    <ul class="cert-list">
-                        <li>Microsoft Office Productivity</li>
-                        <li>Cloud Computing Training</li>
-                        <li>Non-verbal Communication</li>
-                        <li>Interview Skills</li>
-                        <li>AI Tools for Designing</li>
-                    </ul>
+                <div class="section" data-section="5">
+                    <h2>Projects</h2>
+                    <div class="projects-grid">
+                        <div class="project-card">
+                            <h4>Waste Segregation System</h4>
+                            <p>Smart automation for efficient waste management</p>
+                        </div>
+                        <div class="project-card">
+                            <h4>Digital Acoustic Processing</h4>
+                            <p>Advanced audio analysis & processing system</p>
+                        </div>
+                        <div class="project-card">
+                            <h4>E-commerce Website</h4>
+                            <p>Fully responsive online shopping platform</p>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="content-section" data-section="7">
-                    <h1>Contact</h1>
-                    <div class="contact-grid">
-                        <a href="mailto:pradeeptn22@gmail.com" class="contact-item">
+                <div class="section" data-section="6">
+                    <h2>Certificates</h2>
+                    <div class="certificates-grid">
+                        <span class="cert-tag">Microsoft Office</span>
+                        <span class="cert-tag">Cloud Computing</span>
+                        <span class="cert-tag">Non-verbal Communication</span>
+                        <span class="cert-tag">Interview Skills</span>
+                        <span class="cert-tag">AI Tools for Design</span>
+                    </div>
+                </div>
+
+                <div class="section" data-section="7">
+                    <h2>Get In Touch</h2>
+                    <div class="contact-links">
+                        <a href="mailto:pradeeptn22@gmail.com" class="contact-link">
                             <i class="fas fa-envelope"></i>
                             <span>pradeeptn22@gmail.com</span>
                         </a>
-                        <a href="tel:+917550199164" class="contact-item">
+                        <a href="tel:+917550199164" class="contact-link">
                             <i class="fas fa-phone"></i>
                             <span>+91 7550199164</span>
                         </a>
-                        <a href="#" class="contact-item">
+                        <a href="#" class="contact-link">
                             <i class="fab fa-linkedin"></i>
                             <span>LinkedIn</span>
                         </a>
-                        <a href="#" class="contact-item">
+                        <a href="#" class="contact-link">
                             <i class="fab fa-github"></i>
                             <span>GitHub</span>
                         </a>
                     </div>
                 </div>
 
-                <div class="content-section" data-section="8">
-                    <h1>Technical Profile</h1>
-                    <div class="tech-grid">
-                        <div class="tech-category">
+                <div class="section" data-section="8">
+                    <h2>Technical Profile</h2>
+                    <div class="tech-specs">
+                        <div class="spec-group">
                             <h4>Programming</h4>
-                            <span>Python</span><span>C</span><span>C++</span>
+                            <span>Python • C • C++</span>
                         </div>
-                        <div class="tech-category">
+                        <div class="spec-group">
                             <h4>Languages</h4>
-                            <span>Tamil</span><span>English</span>
+                            <span>Tamil • English</span>
                         </div>
-                        <div class="tech-category">
+                        <div class="spec-group">
                             <h4>Tools</h4>
-                            <span>Excel</span><span>Word</span><span>PowerPoint</span>
+                            <span>Excel • Word • PowerPoint</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="content-section" data-section="9">
-                    <h1>Journey Complete 🚀</h1>
-                    <div class="closing-message">
-                        <p>From classroom concepts to real-world code, this journey built skills, solved problems, and ignited passion.</p>
-                        <p>Ready for the next destination—let's build something amazing together!</p>
-                        <p><strong>Thanks for traveling with me. Let's connect! 👨‍💻</strong></p>
+                <div class="section final" data-section="9">
+                    <div class="journey-complete">
+                        <h2>Journey Complete! 🚀</h2>
+                        <p>From concepts to code, I've built skills that solve real problems.</p>
+                        <p>Ready for the next destination. Let's build something amazing together!</p>
+                        <div class="cta-final">
+                            <a href="mailto:pradeeptn22@gmail.com" class="final-btn">Start Journey →</a>
+                        </div>
                     </div>
-                </div>
-
-                <!-- Navigation Buttons -->
-                <div class="nav-buttons">
-                    <button class="nav-btn prev-btn" id="prevBtn">
-                        <i class="fas fa-chevron-left"></i> Previous
-                    </button>
-                    <button class="nav-btn next-btn" id="nextBtn">
-                        Next <i class="fas fa-chevron-right"></i>
-                    </button>
                 </div>
             </div>
         </div>
+
+        <!-- Navigation -->
+        <div class="nav-controls">
+            <button class="nav-btn prev-btn" id="prevBtn">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="nav-btn next-btn" id="nextBtn">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Progress -->
+        <div class="mobile-progress" id="mobileProgress"></div>
     </div>
 
     <script src="script.js"></script>
