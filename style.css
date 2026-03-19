@@ -35,7 +35,7 @@ body {
 .cloud2 { width: 100px; height: 40px; left: 60%; }
 .cloud3 { width: 140px; height: 50px; left: 80%; top: 15%; }
 
-/* PERFECT HIGHWAY ROAD */
+/* PERFECT HORIZONTAL ROAD - MOVES LEFT */
 .road-wrapper {
   position: absolute; bottom: 120px; left: 0; width: 100%; height: 220px;
   border-radius: 30px 30px 0 0; overflow: hidden; z-index: 10;
@@ -43,46 +43,50 @@ body {
 }
 
 .road {
-  display: flex; height: 100%; width: 1100%;
+  display: flex; height: 100%; width: 1200%; /* Extra wide for smooth loop */
   background: linear-gradient(90deg, #333 0%, #2a2a2a 50%, #222 100%);
   position: relative;
   transition: transform 2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  will-change: transform;
 }
 
-.road.moving { transition-duration: 2s; }
-
-/* HORIZONTAL ROAD MARKINGS */
+/* HORIZONTAL WHITE DASHES - TOP LANE */
 .road::before {
   content: '';
-  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-  background-image:
-    repeating-linear-gradient(90deg, 
-      transparent 0px, 
-      transparent 100px, 
-      #ffffff50 100px, 
-      #ffffff50 120px
-    ),
-    repeating-linear-gradient(90deg, 
-      transparent 0px, 
-      transparent 70px, 
-      #ffff44 70px, 
-      #ffff44 80px, 
-      transparent 80px, 
-      transparent 150px
-    );
-  animation: roadMoveHorizontal 3s linear infinite;
+  position: absolute; top: 30%; left: 0; right: 0; height: 6px;
+  background: repeating-linear-gradient(
+    to right,
+    transparent 0px,
+    transparent 80px,
+    #ffffff 80px,
+    #ffffff 100px
+  );
+  animation: whiteDashes 2.5s linear infinite;
 }
 
+/* HORIZONTAL YELLOW CENTER LINE */
 .road::after {
-  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 70px;
-  background: linear-gradient(180deg, transparent 0%, #4a7c59 100%);
+  content: '';
+  position: absolute; top: 42%; left: 0; right: 0; height: 5px;
+  background: repeating-linear-gradient(
+    to right,
+    transparent 0px,
+    transparent 60px,
+    #ffff44 60px,
+    #ffff44 75px
+  );
+  animation: yellowLine 3s linear infinite;
 }
 
-@keyframes roadMoveHorizontal {
-  0% { background-position: 0 0, 0 0; }
-  100% { background-position: -120px 0, -150px 0; }
+@keyframes whiteDashes {
+  from { background-position: 0 0; }
+  to { background-position: 180px 0; }
 }
+
+@keyframes yellowLine {
+  from { background-position: 0 0; }
+  to { background-position: 135px 0; }
+}
+
 
 /* REAL BUS STOPS */
 .stop {
