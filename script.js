@@ -17,19 +17,135 @@ class JourneyPortfolio {
       nextBtn: document.getElementById('nextBtn')
     };
 
-    this.stopNames = ['Welcome', 'Objective', 'Education', 'Skills', 'Experience', 'Projects', 'Certificates', 'Contact', 'Tech Stack', 'Complete!'];
+    this.stopNames = ['Welcome', 'Objective', 'Education', 'Skills', 'Experience', 'Projects', 'Certificates', 'Contact', 'Tech Profile', 'Complete!'];
 
+    // COMPLETE PROFESSIONAL CONTENT
     this.sectionsData = [
-      { title: "Welcome Aboard!", content: `<h3>Pradeep M</h3><p><strong>B.E (Hons) Electronics & Communication Engineering</strong></p><p><strong>Location:</strong> Sriperumbudur</p><p>🚀 Passionate about technology! 💻</p>` },
-      { title: "Career Objective", content: `<h3>My Mission</h3><ul><li>🔥 Cutting-edge technology</li><li>⏰ Time management skills</li><li>🚀 Growth opportunities</li><li>💻 Python, Cloud, Web Dev</li></ul>` },
-      { title: "Education", content: `<h3>St. Joseph College of Engineering</h3><p><strong>B.E (Hons) ECE • 2022–2026</strong></p><p><strong>CGPA: 8.5/10</strong></p>` },
-      { title: "Core Skills", content: `<h3>Technical Skills</h3><ul><li>HTML, CSS, JavaScript</li><li>Python, Java, SQL</li><li>Git, GitHub</li></ul>` },
-      { title: "Experience", content: `<h3>Real Impact</h3><ul><li>☁️ Cloud Computing Internship</li><li>📈 Value Added Course</li></ul>` },
-      { title: "Projects", content: `<h3>Hands-On Work</h3><ul><li>🗑️ Waste Segregation</li><li>🛒 E-commerce Website</li></ul>` },
-      { title: "Certificates", content: `<h3>Certified</h3><ul><li>📊 Microsoft Office</li><li>☁️ Cloud Computing</li><li>💼 Interview Skills</li></ul>` },
-      { title: "Contact", content: `<h3>Get In Touch</h3><p><strong>Email:</strong> pradeeptn22@gmail.com</p><p><strong>Phone:</strong> +91 7550129164</p>` },
-      { title: "Tech Stack", content: `<h3>Full Stack</h3><ul><li>Python, C, C++</li><li>Excel, Word, PowerPoint</li></ul>` },
-      { title: "Complete!", content: `<h3>Journey Done!</h3><p><strong>Ready for the future! 🚀</strong></p>` }
+      { 
+        title: "Welcome Aboard!", 
+        content: `
+          <h3>Pradeep M</h3>
+          <p><strong>B.E (Hons) Electronics and Communication Engineering</strong></p>
+          <p><strong>Location:</strong> Sriperumbudur (near toll plaza)</p>
+          <p>🚀 Passionate about technology and innovation.</p>
+          <p>Ready to drive impactful tech solutions! 💻</p>
+        `
+      },
+      { 
+        title: "Career Objective", 
+        content: `
+          <h3>Driven by Technology</h3>
+          <ul>
+            <li>🔥 Strong interest in cutting-edge technology</li>
+            <li>⏰ Excellent time management skills</li>
+            <li>🚀 Seeking growth opportunities in tech</li>
+            <li>💻 Skilled in Python, Cloud Computing, Marketing, Website Building</li>
+          </ul>
+        `
+      },
+      { 
+        title: "Education", 
+        content: `
+          <h3>St. Joseph College of Engineering</h3>
+          <p><strong>B.E (Hons) ECE • 2022–2026</strong></p>
+          <p><strong>CGPA: 8.5/10</strong></p>
+          <p><strong>Specializations:</strong></p>
+          <ul>
+            <li>🐍 Python Programming</li>
+            <li>☁️ Cloud Computing</li>
+            <li>📈 Digital Marketing</li>
+            <li>🌐 Website Building</li>
+          </ul>
+        `
+      },
+      { 
+        title: "Core Skills", 
+        content: `
+          <h3>Technical Expertise</h3>
+          <ul>
+            <li><strong>Web Technologies:</strong><br>HTML, CSS, JavaScript</li>
+            <li><strong>Programming:</strong><br>Python, Java, SQL</li>
+            <li><strong>Tools:</strong><br>Git, GitHub, MATLAB</li>
+            <li><strong>Soft Skills:</strong><br>Team Collaboration, Time Management, Creativity, Adaptability</li>
+          </ul>
+        `
+      },
+      { 
+        title: "Experience", 
+        content: `
+          <h3>Professional Journey</h3>
+          <ul>
+            <li>
+              ☁️ <strong>Cloud Computing Internship</strong><br>
+              <em>Gateway Software Solutions</em><br>
+              <small>July–August 2025</small>
+            </li>
+            <li>
+              📈 <strong>Value Added Course</strong><br>
+              <em>Best Route Consulting</em><br>
+              <small>March 2025</small>
+            </li>
+          </ul>
+        `
+      },
+      { 
+        title: "Projects", 
+        content: `
+          <h3>Hands-On Projects</h3>
+          <ul>
+            <li>🗑️ <strong>Waste Segregation System</strong></li>
+            <li>🔊 <strong>Digital Acoustic Signal Processing</strong></li>
+            <li>🛒 <strong>E-commerce Website</strong></li>
+          </ul>
+        `
+      },
+      { 
+        title: "Certificates", 
+        content: `
+          <h3>Certified Expertise</h3>
+          <ul>
+            <li>📊 Microsoft Office Productivity</li>
+            <li>☁️ Cloud Computing Training</li>
+            <li>🗣️ Non-verbal Communication</li>
+            <li>💼 Interview Skills</li>
+            <li>🤖 AI Tools for Designing</li>
+          </ul>
+        `
+      },
+      { 
+        title: "Let's Connect", 
+        content: `
+          <h3>Get In Touch</h3>
+          <p><strong>Email:</strong><br>
+          <a href="mailto:pradeeptn22@gmail.com">pradeeptn22@gmail.com</a></p>
+          <p><strong>Phone:</strong><br>+91 7550199164</p>
+          <p><strong>📍 Sriperumbudur, Tamil Nadu</strong></p>
+          <p>🔗 <strong>LinkedIn</strong> | <strong>GitHub</strong> (Coming Soon)</p>
+        `
+      },
+      { 
+        title: "Technical Profile", 
+        content: `
+          <h3>Complete Tech Stack</h3>
+          <ul>
+            <li><strong>Programming:</strong><br>Python, C, C++</li>
+            <li><strong>Languages:</strong><br>Tamil, English</li>
+            <li><strong>Tools:</strong><br>Excel, Word, PowerPoint</li>
+          </ul>
+        `
+      },
+      { 
+        title: "Journey Complete!", 
+        content: `
+          <h3>Ready for Impact</h3>
+          <blockquote>
+            "Transformed from student to tech professional through relentless learning, 
+            hands-on projects, and real-world experience. Eager to contribute innovative 
+            solutions and grow with forward-thinking teams!"
+          </blockquote>
+          <p><strong>Thank you for joining my journey! 🚀</strong></p>
+        `
+      }
     ];
 
     this.init();
@@ -42,7 +158,8 @@ class JourneyPortfolio {
     this.updateProgress();
     this.updateButtons();
     this.bindEvents();
-    // FIX FIRST SLIDE GLITCH
+    
+    // Fix first slide
     setTimeout(() => {
       document.querySelector('.stop').classList.add('active');
       document.querySelector('.stop-label').classList.add('show');
@@ -55,14 +172,28 @@ class JourneyPortfolio {
       stop.style.setProperty('--stop-index', index);
       stop.dataset.index = index;
       
+      // Bus stop shelter
+      const shelter = document.createElement('div');
+      shelter.className = 'bus-stop-shelter';
+      stop.appendChild(shelter);
+      
+      const roof = document.createElement('div');
+      roof.className = 'stop-roof';
+      shelter.appendChild(roof);
+      
+      const walls = document.createElement('div');
+      walls.className = 'stop-walls';
+      shelter.appendChild(walls);
+      
+      const sign = document.createElement('div');
+      sign.className = 'stop-sign';
+      shelter.appendChild(sign);
+      
+      // Label
       const label = document.createElement('div');
       label.className = 'stop-label';
       label.textContent = this.stopNames[index];
       stop.appendChild(label);
-      
-      const marker = document.createElement('div');
-      marker.className = 'stop-marker';
-      stop.appendChild(marker);
     });
   }
 
@@ -93,25 +224,21 @@ class JourneyPortfolio {
   async moveToSection(target) {
     this.isMoving = true;
     
-    // Road + Bus move
     this.elements.road.style.transform = `translateX(-${target * 10}%)`;
     this.elements.bus.style.left = `calc(15% + ${target * 10}% - 7%)`;
     this.elements.road.classList.add('moving');
     this.elements.bus.classList.add('moving');
     
-    // Hide current stop
     document.querySelectorAll('.stop-label').forEach(l => l.classList.remove('show'));
     document.querySelectorAll('.stop').forEach(s => s.classList.remove('active'));
     
     setTimeout(() => {
       this.currentSection = target;
       
-      // Show new stop
       const newStop = document.querySelector(`[data-index="${target}"]`);
       newStop.classList.add('active');
       setTimeout(() => newStop.querySelector('.stop-label').classList.add('show'), 200);
       
-      // Update content
       this.elements.glassCard.classList.remove('show');
       setTimeout(() => {
         this.updateDisplay();
