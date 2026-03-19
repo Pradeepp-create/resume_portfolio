@@ -1,95 +1,204 @@
-const road = document.getElementById("road");
-const dotsContainer = document.getElementById("dots");
-const progressBarFill = document.createElement("div");
-const prevBtn = document.getElementById("prev-btn");
-const nextBtn = document.getElementById("next-btn");
-const card = document.getElementById("card");
-const cardTitle = document.getElementById("card-title");
-const cardText = document.getElementById("card-text");
+class JourneyPortfolio {
+  constructor() {
+    this.currentSection = 0;
+    this.totalSections = 10;
+    this.isMoving = false;
+    
+    this.elements = {
+      road: document.getElementById('road'),
+      bus: document.getElementById('bus'),
+      glassCard: document.getElementById('glassCard'),
+      cardTitle: document.getElementById('cardTitle'),
+      cardContent: document.getElementById('cardContent'),
+      sectionNum: document.getElementById('sectionNum'),
+      progressFill: document.getElementById('progressFill'),
+      progressDots: document.getElementById('progressDots'),
+      prevBtn: document.getElementById('prevBtn'),
+      nextBtn: document.getElementById('nextBtn')
+    };
 
-const wheelLeft = document.querySelector(".wheel-left");
-const wheelRight = document.querySelector(".wheel-right");
+    this.sectionsData = [
+      { title: "Welcome Aboard!", content: `
+        <h3>Pradeep M</h3>
+        <p><strong>B.E (Hons) Electronics & Communication Engineering</strong></p>
+        <p><strong>Location:</strong> Sriperumbudur (near toll plaza)</p>
+        <p>🚀 Passionate about technology and creating impactful solutions. 
+        Ready to drive innovation in tech! 💻</p>` },
+      
+      { title: "Career Objective", content: `
+        <h3>My Mission</h3>
+        <ul>
+          <li>🔥 Strong passion for cutting-edge technology</li>
+          <li>⏰ Excellent time management skills</li>
+          <li>🚀 Seeking growth opportunities in tech</li>
+          <li>💻 Expert in Python, Cloud, Web Dev & Marketing</li>
+        </ul>` },
+      
+      { title: "Education", content: `
+        <h3>St. Joseph College of Engineering</h3>
+        <p><strong>B.E (Hons) ECE • 2022–2026</strong></p>
+        <p><strong>CGPA: 8.5/10</strong></p>
+        <p>Specialized in: Python • Cloud Computing • Marketing • Website Building</p>` },
+      
+      { title: "Core Skills", content: `
+        <h3>Technical Arsenal</h3>
+        <ul>
+          <li><strong>Web:</strong> HTML, CSS, JavaScript</li>
+          <li><strong>Tools:</strong> Git, GitHub, MATLAB</li>
+          <li><strong>Programming:</strong> Python, Java, SQL</li>
+          <li><strong>Soft Skills:</strong> Teamwork, Creativity, Adaptability</li>
+        </ul>` },
+      
+      { title: "Experience", content: `
+        <h3>Real-World Impact</h3>
+        <ul>
+          <li>☁️ <strong>Cloud Computing Internship</strong><br>Gateway Software Solutions (Jul-Aug 2025)</li>
+          <li>📈 <strong>Value Added Course</strong><br>Best Route Consulting (Mar 2025)</li>
+        </ul>` },
+      
+      { title: "Projects", content: `
+        <h3>Hands-On Creations</h3>
+        <ul>
+          <li>🗑️ <strong>Waste Segregation System</strong></li>
+          <li>🔊 <strong>Digital Acoustic Signal Processing</strong></li>
+          <li>🛒 <strong>E-commerce Website</strong></li>
+        </ul>` },
+      
+      { title: "Certificates", content: `
+        <h3>Certified Expertise</h3>
+        <ul>
+          <li>📊 Microsoft Office Productivity</li>
+          <li>☁️ Cloud Computing Training</li>
+          <li>🗣️ Non-verbal Communication</li>
+          <li>💼 Interview Skills</li>
+          <li>🤖 AI Tools for Designing</li>
+        </ul>` },
+      
+      { title: "Let's Connect", content: `
+        <h3>Get In Touch</h3>
+        <p><strong>Email:</strong> <a href="mailto:pradeeptn22@gmail.com">pradeeptn22@gmail.com</a></p>
+        <p><strong>Phone:</strong> +91 7550129164</p>
+        <p>📍 Sriperumbudur, Tamil Nadu</p>
+        <p>🔗 LinkedIn | GitHub (Coming Soon)</p>` },
+      
+      { title: "Technical Stack", content: `
+        <h3>Full Tech Profile</h3>
+        <ul>
+          <li><strong>Programming:</strong> Python, C, C++</li>
+          <li><strong>Tools:</strong> Excel, Word, PowerPoint</li>
+          <li><strong>Languages:</strong> Tamil, English</li>
+        </ul>` },
+      
+      { title: "Journey Complete! 🎉", content: `
+        <h3>Ready for the Future</h3>
+        <blockquote>"From student to tech leader – every stop built my skills, 
+        vision, and determination. Let's create something amazing together!"</blockquote>
+        <p><strong>Thank you for joining my journey! 🚀</strong></p>` }
+    ];
 
-// Sections data
-const sections = [
-  {
-    id: "intro",
-    title: "Intro",
-    content: `
-      <p>Pradeep M</p>
-      <p>B.E (Hons) Electronics and Communication Engineering</p>
-      <p>Location: Sriperumbudur (near toll plaza)</p>
-      <p>Welcome! I'm passionate about technology and building things that make a difference.</p>
-    `,
-  },
-  {
-    id: "objective",
-    title: "Career Objective",
-    content: `
-      <ul>
-        <li>Strong interest in technology and continuous learning.</li>
-        <li>Good time management and adaptability in fast‑changing environments.</li>
-        <li>Seeking opportunities to grow and contribute in the tech industry.</li>
-        <li>Skilled in Python, Cloud Computing, Marketing, and Website Building.</li>
-      </ul>
-    `,
-  },
-  {
-    id: "education",
-    title: "Education",
-    content: `
-      <p>B.E (Hons) Electronics and Communication Engineering</p>
-      <p>St. Joseph College of Engineering (2022–2026)</p>
-      <p>CGPA: 8.5</p>
-      <p>Specialization: Python, Cloud Computing, Marketing, Website Building</attached>
-    `,
-  },
-  {
-    id: "skills",
-    title: "Skills",
-    content: `
-      <ul>
-        <li><strong>Web Technologies:</strong> HTML, CSS, JavaScript</li>
-        <li><strong>Tools:</strong> Git, GitHub, MATLAB</li>
-        <li><strong>Soft Skills:</strong> Team Collaboration, Time Management, Creativity, Adaptability</li>
-        <li><strong>Programming:</strong> Python, Java, SQL</li>
-      </ul>
-    `,
-  },
-  {
-    id: "experience",
-    title: "Experience",
-    content: `
-      <ul>
-        <li><strong>Cloud Computing Internship</strong> – Gateway Software Solutions, July–Aug 2025</li>
-        <li><strong>Value Added Course</strong> – Best Route Consulting, March 2025</li>
-      </ul>
-    `,
-  },
-  {
-    id: "projects",
-    title: "Projects",
-    content: `
-      <ul>
-        <li>Waste Segregation System</li>
-        <li>Digital Acoustic Signal Processing</li>
-        <li>E‑commerce Website</li>
-      </ul>
-    `,
-  },
-  {
-    id: "certificates",
-    title: "Certificates",
-    content: `
-      <ul>
-        <li>Microsoft Office Productivity</li>
-        <li>Cloud Computing Training</li>
-        <li>Non‑verbal Communication</li>
-        <li>Interview Skills</li>
-        <li>AI Tools for Designing</li>
-      </ul>
-    `,
-  },
-  {
-    id: "contact",
-    title
+    this.init();
+  }
+
+  init() {
+    this.createProgressDots();
+    this.updateDisplay();
+    this.bindEvents();
+    this.updateButtons();
+  }
+
+  createProgressDots() {
+    const container = this.elements.progressDots;
+    container.innerHTML = '';
+    
+    for (let i = 0; i < this.totalSections; i++) {
+      const dot = document.createElement('div');
+      dot.className = 'progress-dot';
+      dot.addEventListener('click', () => this.goToSection(i));
+      container.appendChild(dot);
+    }
+    this.updateProgressDots();
+  }
+
+  bindEvents() {
+    this.elements.nextBtn.addEventListener('click', () => this.nextSection());
+    this.elements.prevBtn.addEventListener('click', () => this.prevSection());
+  }
+
+  async nextSection() {
+    if (this.currentSection < this.totalSections - 1 && !this.isMoving) {
+      await this.moveToSection(this.currentSection + 1);
+    }
+  }
+
+  async prevSection() {
+    if (this.currentSection > 0 && !this.isMoving) {
+      await this.moveToSection(this.currentSection - 1);
+    }
+  }
+
+  async moveToSection(targetSection) {
+    this.isMoving = true;
+    
+    // Animate bus moving (road slides)
+    const roadPos = -(targetSection * 10); // 10% per section
+    this.elements.road.style.transform = `translateX(${roadPos}%)`;
+    
+    // Bus wheels spin
+    this.elements.bus.classList.add('moving');
+    
+    // Stop after 2 seconds
+    setTimeout(() => {
+      this.currentSection = targetSection;
+      this.elements.bus.classList.remove('moving');
+      this.isMoving = false;
+      
+      // Activate correct stop
+      document.querySelectorAll('.stop').forEach((stop, i) => {
+        stop.classList.toggle('active', i === targetSection);
+      });
+      
+      this.updateDisplay();
+      this.updateProgress();
+      this.updateButtons();
+    }, 2000);
+  }
+
+  goToSection(sectionIndex) {
+    if (!this.isMoving && sectionIndex !== this.currentSection) {
+      this.moveToSection(sectionIndex);
+    }
+  }
+
+  updateDisplay() {
+    const section = this.sectionsData[this.currentSection];
+    this.elements.cardTitle.textContent = section.title;
+    this.elements.cardContent.innerHTML = section.content;
+    this.elements.sectionNum.textContent = `Stop ${this.currentSection + 1}/${this.totalSections}`;
+  }
+
+  updateProgress() {
+    const progress = ((this.currentSection + 1) / this.totalSections) * 100;
+    this.elements.progressFill.style.width = progress + '%';
+  }
+
+  updateProgressDots() {
+    document.querySelectorAll('.progress-dot').forEach((dot, i) => {
+      dot.classList.toggle('active', i === this.currentSection);
+    });
+  }
+
+  updateButtons() {
+    this.elements.prevBtn.classList.toggle('disabled', this.currentSection === 0);
+    this.elements.nextBtn.classList.toggle('disabled', this.currentSection === this.totalSections - 1);
+  }
+
+  updateProgress() {
+    this.updateProgressDots();
+    this.updateButtons();
+  }
+}
+
+// START JOURNEY
+document.addEventListener('DOMContentLoaded', () => {
+  new JourneyPortfolio();
+});
