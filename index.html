@@ -10,18 +10,15 @@
   <div class="journey-container">
     <!-- LEFT: Road + Bus -->
     <div class="left-side">
-      <div class="environment">
-        <div class="sky"></div>
-        <div class="clouds">
-          <div class="cloud cloud1"></div>
-          <div class="cloud cloud2"></div>
-          <div class="cloud cloud3"></div>
-        </div>
+      <div class="sky"></div>
+      <div class="clouds">
+        <div class="cloud cloud1"></div>
+        <div class="cloud cloud2"></div>
+        <div class="cloud cloud3"></div>
       </div>
 
       <div class="road-wrapper">
         <div class="road" id="road">
-          <!-- 10 Bus Stops -->
           <div class="stop active" data-section="0"></div>
           <div class="stop" data-section="1"></div>
           <div class="stop" data-section="2"></div>
@@ -35,21 +32,20 @@
         </div>
       </div>
 
-      <!-- REALISTIC BUS -->
       <div class="bus" id="bus">
-        <div class="bus-main">
+        <div class="bus-body">
+          <div class="bus-main"></div>
           <div class="bus-windows">
             <div class="window"></div>
             <div class="window"></div>
             <div class="window"></div>
           </div>
-          <div class="bus-roof"></div>
+          <div class="bus-door"></div>
         </div>
         <div class="wheel front-wheel"></div>
         <div class="wheel rear-wheel"></div>
       </div>
 
-      <!-- Progress -->
       <div class="progress-section">
         <div class="progress-bar">
           <div class="progress-fill" id="progressFill"></div>
@@ -58,22 +54,21 @@
       </div>
     </div>
 
-    <!-- RIGHT: Popup Card -->
+    <!-- RIGHT: CONTENT -->
     <div class="right-side">
       <div class="glass-card" id="glassCard">
         <div class="card-header">
-          <h1 id="cardTitle">Welcome to My Journey</h1>
+          <h1 id="cardTitle">Welcome</h1>
           <div class="section-number" id="sectionNum">Stop 1/10</div>
         </div>
         <div class="card-content" id="cardContent">
-          <!-- Content loads here -->
+          Loading journey...
         </div>
       </div>
       
-      <!-- Navigation Buttons -->
       <div class="nav-buttons">
-        <button id="prevBtn" class="nav-btn disabled">← Previous Stop</button>
-        <button id="nextBtn" class="nav-btn">Next Stop →</button>
+        <button id="prevBtn" class="nav-btn disabled">← Previous</button>
+        <button id="nextBtn" class="nav-btn">Next →</button>
       </div>
     </div>
   </div>
