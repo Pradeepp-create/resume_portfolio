@@ -3,106 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pradeep M - Busfolio Journey</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <title>Pradeep M - Busfolio Portfolio</title>
+    >
+    //fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    //cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
-<body class="dark-mode">
-    <!-- Dark Mode Toggle -->
-    <div class="theme-toggle">
-        <button id="themeSwitch" class="theme-btn">
-            <span class="sun-icon">☀️</span>
-            <span class="moon-icon">🌙</span>
-        </button>
-    </div>
+<body class="dark">
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" id="themeToggle">
+        <i class="fas fa-sun"></i>
+        <i class="fas fa-moon"></i>
+    </button>
 
-    <div class="app">
-        <!-- Journey Route Map -->
-        <div class="journey-map">
-            <div class="route-path"></div>
-            <div class="route-stops">
-                <div class="stop active" data-stop="0"><span></span></div>
-                <div class="stop" data-stop="1"><span></span></div>
-                <div class="stop" data-stop="2"><span></span></div>
-                <div class="stop" data-stop="3"><span></span></div>
-                <div class="stop" data-stop="4"><span></span></div>
-                <div class="stop" data-stop="5"><span></span></div>
-                <div class="stop" data-stop="6"><span></span></div>
-                <div class="stop" data-stop="7"><span></span></div>
-                <div class="stop" data-stop="8"><span></span></div>
-                <div class="stop final-stop" data-stop="9"><span></span></div>
+    <div class="journey-container">
+        <!-- LEFT: Journey Track & Bus -->
+        <div class="left-panel">
+            <!-- Vertical Journey Track -->
+            <div class="journey-track">
+                <div class="track-line">
+                    <div class="track-progress" id="trackProgress"></div>
+                </div>
+                <div class="track-stops" id="trackStops"></div>
             </div>
-            <div class="progress-line">
-                <div class="progress-fill"></div>
-            </div>
-        </div>
 
-        <!-- Premium Bus -->
-        <div class="bus-scene">
-            <div class="road-bg"></div>
+            <!-- Clean Road -->
+            <div class="road-container">
+                <div class="road"></div>
+                <div class="road-lines"></div>
+            </div>
+
+            <!-- Modern Bus -->
             <div class="bus-container" id="busContainer">
                 <div class="bus" id="bus">
-                    <div class="bus-glow"></div>
                     <div class="bus-body">
-                        <div class="bus-roof">
-                            <div class="roof-light"></div>
-                        </div>
+                        <div class="bus-roof"></div>
                         <div class="bus-windows">
-                            <div class="window-row">
-                                <div class="window"></div>
-                                <div class="window"></div>
-                                <div class="window"></div>
-                            </div>
+                            <div class="window"></div>
+                            <div class="window"></div>
+                            <div class="window"></div>
                         </div>
                         <div class="bus-front">
-                            <div class="headlight left"></div>
-                            <div class="headlight right"></div>
+                            <div class="headlights"></div>
                             <div class="grille"></div>
-                            <div class="front-signal"></div>
-                        </div>
-                        <div class="bus-side-details">
-                            <div class="door-handle"></div>
                         </div>
                     </div>
-                    <div class="wheels-container">
+                    <div class="bus-wheels">
                         <div class="wheel front-wheel">
-                            <div class="rim"></div>
-                            <div class="tire"></div>
-                            <div class="hubcap"></div>
+                            <div class="wheel-rim"></div>
                         </div>
                         <div class="wheel rear-wheel">
-                            <div class="rim"></div>
-                            <div class="tire"></div>
-                            <div class="hubcap"></div>
+                            <div class="wheel-rim"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Navigation -->
-        <div class="nav-controls">
-            <button class="nav-btn prev-btn" id="prevBtn">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-            <button class="nav-btn next-btn" id="nextBtn">
-                <i class="fas fa-chevron-right"></i>
-            </button>
-        </div>
-
-        <!-- Content Popup -->
-        <div class="content-popup" id="contentPopup">
-            <div class="popup-inner">
-                <div class="popup-content" id="popupContent"></div>
-                <div class="popup-nav">
-                    <button class="popup-btn prev-popup" id="prevPopup">
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
-                    <button class="popup-btn next-popup" id="nextPopup">
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
+        <!-- RIGHT: Content Preview -->
+        <div class="right-panel">
+            <div class="content-preview" id="contentPreview">
+                <div class="preview-inner">
+                    <div class="section-content active" data-section="0">
+                        <h1>Pradeep M</h1>
+                        <h2>B.E (Hons) ECE</h2>
+                        <p>Sriperumbudur</p>
+                        <span>Tech journey begins 🚀</span>
+                    </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Full Content Modal -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-content" id="modalContent">
+            <div class="modal-nav">
+                <button class="nav-btn prev" id="modalPrev">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <span class="section-counter" id="sectionCounter">1 / 10</span>
+                <button class="nav-btn next" id="modalNext">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
             </div>
         </div>
     </div>
