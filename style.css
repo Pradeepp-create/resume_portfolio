@@ -35,6 +35,7 @@ body {
 .cloud3 { width: 140px; height: 50px; left: 80%; top: 15%; }
 
 /* REAL HIGHWAY WITH RECTANGLE MARKINGS */
+/* NORMAL HIGHWAY ROAD - SIMPLE & CLEAN */
 .road-wrapper {
   position: absolute; bottom: 120px; left: 0; width: 100%; height: 220px;
   border-radius: 30px 30px 0 0; overflow: hidden; z-index: 10;
@@ -48,58 +49,48 @@ body {
   will-change: transform;
 }
 
-/* RECTANGLE ROAD MARKINGS - REAL HIGHWAY */
+/* PERFECT NORMAL ROAD MARKINGS */
 .road::before {
   content: '';
   position: absolute;
-  top: 28%;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  top: 0; left: 0; right: 0; bottom: 0;
   background-image:
-    /* YELLOW CENTER LINE - RECTANGLES */
-    repeating-conic-gradient(
-      from 90deg at 50% 50%,
-      transparent 0deg,
-      transparent 8deg,
-      #ffff44 8deg,
-      #ffff44 12deg,
-      transparent 12deg,
-      transparent 24deg
+    /* YELLOW CENTER LINE DASHES */
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      transparent 80px,
+      #ffff44 80px,
+      #ffff44 100px,
+      transparent 100px,
+      transparent 180px
     ),
-    /* WHITE LANE MARKINGS - RECTANGLES */
-    repeating-conic-gradient(
-      from 90deg at 25% 50%,
-      transparent 0deg,
-      transparent 10deg,
-      #ffffff70 10deg,
-      #ffffff70 14deg,
-      transparent 14deg,
-      transparent 24deg
-    ),
-    /* WHITE LANE MARKINGS - RIGHT SIDE */
-    repeating-conic-gradient(
-      from 90deg at 75% 50%,
-      transparent 0deg,
-      transparent 10deg,
-      #ffffff70 10deg,
-      #ffffff70 14deg,
-      transparent 14deg,
-      transparent 24deg
+    /* WHITE LANE MARKINGS */
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      transparent 120px,
+      #ffffff60 120px,
+      #ffffff60 140px,
+      transparent 140px,
+      transparent 260px
     );
   animation: roadMove 3s linear infinite;
-  background-size: 400px 100%, 400px 100%, 400px 100%;
 }
 
 .road::after {
   content: ''; 
   position: absolute; 
-  bottom: 0; 
-  left: 0; 
-  right: 0; 
+  bottom: 0; left: 0; right: 0; 
   height: 70px;
   background: linear-gradient(180deg, transparent 0%, #4a7c59 100%);
 }
+
+@keyframes roadMove {
+  0% { background-position: 0 0, 0 0; }
+  100% { background-position: 300px 0, 300px 0; }
+}
+
 
 /* REAL BUS STOP DESIGN */
 .stop {
