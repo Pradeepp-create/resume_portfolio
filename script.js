@@ -1,161 +1,98 @@
-// script.js - FIXED VERSION
-class JourneyPortfolio {
+// script.js - Busfolio Logic
+class Busfolio {
     constructor() {
         this.currentSection = 0;
         this.totalSections = 10;
-        this.isAnimating = false;
-        
+        this.isTransitioning = false;
         this.init();
     }
-    
+
     init() {
-        this.cacheElements();
+        this.cacheDOM();
         this.bindEvents();
-        this.updateAll();
+        this.updateUI();
     }
-    
-    cacheElements() {
-        this.roadContainer = document.querySelector('.road-container');
-        this.progressFill = document.querySelector('.progress-fill');
-        this.dots = document.querySelectorAll('.dot');
-        this.sections = document.querySelectorAll('.content-section');
+
+    cacheDOM() {
+        this.bus = document.getElementById('bus');
+        this.sections = document.querySelectorAll('.section');
+        this.stops = document.querySelectorAll('.stop');
         this.prevBtn = document.getElementById('prevBtn');
         this.nextBtn = document.getElementById('nextBtn');
     }
-    
+
     bindEvents() {
-        // Next/Prev buttons
-        this.prevBtn.addEventListener('click', () => this.prevSection());
-        this.nextBtn.addEventListener('click', () => this.nextSection());
+        this.prevBtn.addEventListener('click', () => this.prev());
+        this.nextBtn.addEventListener('click', () => this.next());
         
-        // Dots navigation
-        this.dots.forEach((dot, index) => {
-            dot.addEventListener('click', () => {
-                if (!this.isAnimating && index !== this.currentSection) {
-                    this.goToSection(index);
-                }
-            });
+        this.stops.forEach((stop, index) => {
+            stop.addEventListener('click', () => this.goTo(index));
         });
-        
-        // Keyboard support
+
         document.addEventListener('keydown', (e) => {
-            switch(e.key) {
-                case 'ArrowLeft':
-                case 'ArrowUp':
-                    e.preventDefault();
-                    this.prevSection();
-                    break;
-                case 'ArrowRight':
-                case 'ArrowDown':
-                case ' ':
-                    e.preventDefault();
-                    this.nextSection();
-                    break;
-            }
+            if (e.key === 'ArrowLeft') this.prev();
+            if (e.key === 'ArrowRight') this.next();
         });
-        
-        // Wheel navigation
-        document.addEventListener('wheel', (e) => {
-            if (this.isAnimating) return;
-            e.preventDefault();
-            if (e.deltaY > 0) {
-                this.nextSection();
-            } else {
-                this.prevSection();
-            }
-        }, { passive: false });
     }
-    
-    nextSection() {
-        if (this.currentSection < this.totalSections - 1 && !this.isAnimating) {
-            this.goToSection(this.currentSection + 1);
+
+    next() {
+        if (this.currentSection < this.totalSections - 1 && !this.isTransitioning) {
+            this.goTo(this.currentSection + 1);
         }
     }
-    
-    prevSection() {
-        if (this.currentSection > 0 && !this.isAnimating) {
-            this.goToSection(this.currentSection - 1);
+
+    prev() {
+        if (this.currentSection > 0 && !this.isTransitioning) {
+            this.goTo(this.currentSection - 1);
         }
     }
-    
-    goToSection(targetSection) {
-        if (this.isAnimating || targetSection === this.currentSection) return;
+
+    goTo(targetSection) {
+        if (this.isTransitioning || targetSection === this.currentSection) return;
         
-        this.isAnimating = true;
+        this.isTransitioning = true;
+        
+        // Update position
         this.currentSection = targetSection;
         
-        // Animate everything
-        this.updateRoad();
-        this.updateProgress();
-        this.updateContent();
-        this.updateButtons();
-        
-        // Reset animation lock
+        // Animate bus
+        this.bus.classList.remove('bus-move-left', 'bus-move-right');
         setTimeout(() => {
-            this.isAnimating = false;
-        }, 900);
+            if (targetSection > this.currentSection - 1) {
+                this.bus.classList.add('bus-move-right');
+            } else {
+                this.bus.classList.add('bus-move-left');
+            }
+        }, 50);
+        
+        // Update UI
+        this.updateUI();
+        
+        // Reset transition
+        setTimeout(() => {
+            this.isTransitioning = false;
+            this.bus.classList.remove('bus-move-left', 'bus-move-right');
+        }, 1000);
     }
-    
-    updateRoad() {
-        const offset = -(this.currentSection * 10);
-        this.roadContainer.style.transform = `translateX(${offset}%)`;
-    }
-    
-    updateProgress() {
-        const percentage = ((this.currentSection + 1) / this.totalSections) * 100;
-        this.progressFill.style.width = `${percentage}%`;
-    }
-    
-    updateContent() {
-        // Remove active from all
-        this.sections.forEach((section, index) => {
-            section.classList.remove('active');
-        });
-        this.dots.forEach((dot, index) => {
-            dot.classList.remove('active');
+
+    updateUI() {
+        // Update sections
+        this.sections.forEach((section, i) => {
+            section.classList.toggle('active', i === this.currentSection);
         });
         
-        // Add active to current
-        this.sections[this.currentSection].classList.add('active');
-        this.dots[this.currentSection].classList.add('active');
-    }
-    
-    updateButtons() {
+        // Update stops
+        this.stops.forEach((stop, i) => {
+            stop.classList.toggle('active', i === this.currentSection);
+        });
+        
+        // Update buttons
         this.prevBtn.disabled = this.currentSection === 0;
         this.nextBtn.disabled = this.currentSection === this.totalSections - 1;
-        
-        this.prevBtn.style.opacity = this.currentSection > 0 ? '1' : '0.4';
-        this.nextBtn.style.opacity = this.currentSection < this.totalSections - 1 ? '1' : '0.4';
-        
-        // Visual feedback
-        if (this.currentSection === 0) {
-            this.prevBtn.style.cursor = 'not-allowed';
-        } else {
-            this.prevBtn.style.cursor = 'pointer';
-        }
-        
-        if (this.currentSection === this.totalSections - 1) {
-            this.nextBtn.style.cursor = 'not-allowed';
-        } else {
-            this.nextBtn.style.cursor = 'pointer';
-        }
-    }
-    
-    updateAll() {
-        this.updateRoad();
-        this.updateProgress();
-        this.updateContent();
-        this.updateButtons();
     }
 }
 
-// 🔥 START ON LOAD
+// Initialize
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('🚀 Portfolio loaded!');
-    new JourneyPortfolio();
-});
-
-// Smooth page load
-window.addEventListener('load', () => {
-    document.body.style.opacity = '1';
+    new Busfolio();
 });
