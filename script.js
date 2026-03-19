@@ -4,7 +4,6 @@ class JourneyPortfolio {
     this.totalSections = 10;
     this.isMoving = false;
     
-    // GET ALL ELEMENTS
     this.elements = {
       road: document.getElementById('road'),
       bus: document.getElementById('bus'),
@@ -20,45 +19,55 @@ class JourneyPortfolio {
 
     this.stopNames = ['Welcome', 'Objective', 'Education', 'Skills', 'Experience', 'Projects', 'Certificates', 'Contact', 'Tech Stack', 'Complete!'];
 
-    // ALL YOUR CONTENT
     this.sectionsData = [
-      { title: "Welcome Aboard!", content: `<h3>Pradeep M</h3><p><strong>B.E (Hons) Electronics & Communication Engineering</strong></p><p><strong>Location:</strong> Sriperumbudur (near toll plaza)</p><p>🚀 Passionate about technology and creating impactful solutions. Ready to drive innovation in tech! 💻</p>` },
-      { title: "Career Objective", content: `<h3>My Mission</h3><ul><li>🔥 Strong passion for cutting-edge technology</li><li>⏰ Excellent time management skills</li><li>🚀 Seeking growth opportunities in tech</li><li>💻 Expert in Python, Cloud, Web Dev & Marketing</li></ul>` },
-      { title: "Education", content: `<h3>St. Joseph College of Engineering</h3><p><strong>B.E (Hons) ECE • 2022–2026</strong></p><p><strong>CGPA: 8.5/10</strong></p><p>Specialized in: Python • Cloud Computing • Marketing • Website Building</p>` },
-      { title: "Core Skills", content: `<h3>Technical Arsenal</h3><ul><li><strong>Web:</strong> HTML, CSS, JavaScript</li><li><strong>Tools:</strong> Git, GitHub, MATLAB</li><li><strong>Programming:</strong> Python, Java, SQL</li><li><strong>Soft Skills:</strong> Teamwork, Creativity, Adaptability</li></ul>` },
-      { title: "Experience", content: `<h3>Real-World Impact</h3><ul><li>☁️ <strong>Cloud Computing Internship</strong><br>Gateway Software Solutions (Jul-Aug 2025)</li><li>📈 <strong>Value Added Course</strong><br>Best Route Consulting (Mar 2025)</li></ul>` },
-      { title: "Projects", content: `<h3>Hands-On Creations</h3><ul><li>🗑️ <strong>Waste Segregation System</strong></li><li>🔊 <strong>Digital Acoustic Signal Processing</strong></li><li>🛒 <strong>E-commerce Website</strong></li></ul>` },
-      { title: "Certificates", content: `<h3>Certified Expertise</h3><ul><li>📊 Microsoft Office Productivity</li><li>☁️ Cloud Computing Training</li><li>🗣️ Non-verbal Communication</li><li>💼 Interview Skills</li><li>🤖 AI Tools for Designing</li></ul>` },
-      { title: "Let's Connect", content: `<h3>Get In Touch</h3><p><strong>Email:</strong> <a href="mailto:pradeeptn22@gmail.com">pradeeptn22@gmail.com</a></p><p><strong>Phone:</strong> +91 7550129164</p><p>📍 Sriperumbudur, Tamil Nadu</p><p>🔗 LinkedIn | GitHub (Coming Soon)</p>` },
-      { title: "Technical Stack", content: `<h3>Full Tech Profile</h3><ul><li><strong>Programming:</strong> Python, C, C++</li><li><strong>Tools:</strong> Excel, Word, PowerPoint</li><li><strong>Languages:</strong> Tamil, English</li></ul>` },
-      { title: "Journey Complete!", content: `<h3>Ready for the Future</h3><blockquote>"From student to tech leader – every stop built my skills, vision, and determination. Let's create something amazing together!"</blockquote><p><strong>Thank you for joining my journey! 🚀</strong></p>` }
+      { title: "Welcome Aboard!", content: `<h3>Pradeep M</h3><p><strong>B.E (Hons) Electronics & Communication Engineering</strong></p><p><strong>Location:</strong> Sriperumbudur</p><p>🚀 Passionate about technology! 💻</p>` },
+      { title: "Career Objective", content: `<h3>My Mission</h3><ul><li>🔥 Cutting-edge technology</li><li>⏰ Time management skills</li><li>🚀 Growth opportunities</li><li>💻 Python, Cloud, Web Dev</li></ul>` },
+      { title: "Education", content: `<h3>St. Joseph College of Engineering</h3><p><strong>B.E (Hons) ECE • 2022–2026</strong></p><p><strong>CGPA: 8.5/10</strong></p>` },
+      { title: "Core Skills", content: `<h3>Technical Skills</h3><ul><li>HTML, CSS, JavaScript</li><li>Python, Java, SQL</li><li>Git, GitHub</li></ul>` },
+      { title: "Experience", content: `<h3>Real Impact</h3><ul><li>☁️ Cloud Computing Internship</li><li>📈 Value Added Course</li></ul>` },
+      { title: "Projects", content: `<h3>Hands-On Work</h3><ul><li>🗑️ Waste Segregation</li><li>🛒 E-commerce Website</li></ul>` },
+      { title: "Certificates", content: `<h3>Certified</h3><ul><li>📊 Microsoft Office</li><li>☁️ Cloud Computing</li><li>💼 Interview Skills</li></ul>` },
+      { title: "Contact", content: `<h3>Get In Touch</h3><p><strong>Email:</strong> pradeeptn22@gmail.com</p><p><strong>Phone:</strong> +91 7550129164</p>` },
+      { title: "Tech Stack", content: `<h3>Full Stack</h3><ul><li>Python, C, C++</li><li>Excel, Word, PowerPoint</li></ul>` },
+      { title: "Complete!", content: `<h3>Journey Done!</h3><p><strong>Ready for the future! 🚀</strong></p>` }
     ];
 
     this.init();
   }
 
   init() {
-    this.createStopLabels();
+    this.setupStops();
     this.createProgressDots();
     this.updateDisplay();
-    this.bindEvents();
+    this.updateProgress();
     this.updateButtons();
+    this.bindEvents();
+    // FIX FIRST SLIDE GLITCH
+    setTimeout(() => {
+      document.querySelector('.stop').classList.add('active');
+      document.querySelector('.stop-label').classList.add('show');
+      this.elements.glassCard.classList.add('show');
+    }, 100);
   }
 
-  createStopLabels() {
+  setupStops() {
     document.querySelectorAll('.stop').forEach((stop, index) => {
+      stop.style.setProperty('--stop-index', index);
+      stop.dataset.index = index;
+      
       const label = document.createElement('div');
       label.className = 'stop-label';
       label.textContent = this.stopNames[index];
       stop.appendChild(label);
+      
+      const marker = document.createElement('div');
+      marker.className = 'stop-marker';
+      stop.appendChild(marker);
     });
-    // Show first stop name
-    document.querySelector('.stop-label').classList.add('show');
   }
 
   createProgressDots() {
     const container = this.elements.progressDots;
-    container.innerHTML = '';
     for (let i = 0; i < this.totalSections; i++) {
       const dot = document.createElement('div');
       dot.className = 'progress-dot';
@@ -69,45 +78,40 @@ class JourneyPortfolio {
   }
 
   bindEvents() {
-    this.elements.nextBtn.addEventListener('click', () => this.nextSection());
-    this.elements.prevBtn.addEventListener('click', () => this.prevSection());
+    this.elements.nextBtn.onclick = () => this.nextSection();
+    this.elements.prevBtn.onclick = () => this.prevSection();
   }
 
   async nextSection() {
-    if (this.currentSection < this.totalSections - 1 && !this.isMoving) {
-      await this.moveToSection(this.currentSection + 1);
-    }
+    if (this.currentSection < 9 && !this.isMoving) await this.moveToSection(this.currentSection + 1);
   }
 
   async prevSection() {
-    if (this.currentSection > 0 && !this.isMoving) {
-      await this.moveToSection(this.currentSection - 1);
-    }
+    if (this.currentSection > 0 && !this.isMoving) await this.moveToSection(this.currentSection - 1);
   }
 
-  async moveToSection(targetSection) {
+  async moveToSection(target) {
     this.isMoving = true;
     
+    // Road + Bus move
+    this.elements.road.style.transform = `translateX(-${target * 10}%)`;
+    this.elements.bus.style.left = `calc(15% + ${target * 10}% - 7%)`;
     this.elements.road.classList.add('moving');
-    const roadPos = -(targetSection * 10);
-    this.elements.road.style.transform = `translateX(${roadPos}%)`;
-    
     this.elements.bus.classList.add('moving');
-    document.querySelectorAll('.stop-label').forEach(label => label.classList.remove('show'));
+    
+    // Hide current stop
+    document.querySelectorAll('.stop-label').forEach(l => l.classList.remove('show'));
+    document.querySelectorAll('.stop').forEach(s => s.classList.remove('active'));
     
     setTimeout(() => {
-      this.currentSection = targetSection;
-      this.elements.bus.classList.remove('moving', 'arrived');
-      this.elements.bus.classList.add('arrived');
+      this.currentSection = target;
       
-      document.querySelectorAll('.stop').forEach((stop, i) => {
-        stop.classList.toggle('active', i === targetSection);
-      });
+      // Show new stop
+      const newStop = document.querySelector(`[data-index="${target}"]`);
+      newStop.classList.add('active');
+      setTimeout(() => newStop.querySelector('.stop-label').classList.add('show'), 200);
       
-      setTimeout(() => {
-        document.querySelectorAll('.stop-label')[targetSection].classList.add('show');
-      }, 100);
-      
+      // Update content
       this.elements.glassCard.classList.remove('show');
       setTimeout(() => {
         this.updateDisplay();
@@ -115,16 +119,17 @@ class JourneyPortfolio {
         this.updateProgress();
         this.updateButtons();
         this.isMoving = false;
-      }, 200);
+      }, 300);
       
-      setTimeout(() => this.elements.bus.classList.remove('arrived'), 500);
+      this.elements.bus.classList.remove('moving');
+      this.elements.bus.classList.add('arrived');
+      setTimeout(() => this.elements.bus.classList.remove('arrived'), 600);
+      
     }, 2000);
   }
 
-  goToSection(sectionIndex) {
-    if (!this.isMoving && sectionIndex !== this.currentSection) {
-      this.moveToSection(sectionIndex);
-    }
+  goToSection(index) {
+    if (!this.isMoving && index !== this.currentSection) this.moveToSection(index);
   }
 
   updateDisplay() {
@@ -135,8 +140,7 @@ class JourneyPortfolio {
   }
 
   updateProgress() {
-    const progress = ((this.currentSection + 1) / 10) * 100;
-    this.elements.progressFill.style.width = progress + '%';
+    this.elements.progressFill.style.width = `${((this.currentSection + 1) / 10) * 100}%`;
     this.updateProgressDots();
   }
 
