@@ -1,4 +1,4 @@
-// script.js
+// script.js - FIXED VERSION
 class JourneyPortfolio {
     constructor() {
         this.currentSection = 0;
@@ -11,9 +11,7 @@ class JourneyPortfolio {
     init() {
         this.cacheElements();
         this.bindEvents();
-        this.updateRoadPosition();
-        this.updateProgress();
-        this.updateContent();
+        this.updateAll();
     }
     
     cacheElements() {
@@ -26,9 +24,11 @@ class JourneyPortfolio {
     }
     
     bindEvents() {
+        // Next/Prev buttons
         this.prevBtn.addEventListener('click', () => this.prevSection());
         this.nextBtn.addEventListener('click', () => this.nextSection());
         
+        // Dots navigation
         this.dots.forEach((dot, index) => {
             dot.addEventListener('click', () => {
                 if (!this.isAnimating && index !== this.currentSection) {
@@ -37,11 +37,33 @@ class JourneyPortfolio {
             });
         });
         
-        // Keyboard navigation
+        // Keyboard support
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft') this.prevSection();
-            if (e.key === 'ArrowRight') this.nextSection();
+            switch(e.key) {
+                case 'ArrowLeft':
+                case 'ArrowUp':
+                    e.preventDefault();
+                    this.prevSection();
+                    break;
+                case 'ArrowRight':
+                case 'ArrowDown':
+                case ' ':
+                    e.preventDefault();
+                    this.nextSection();
+                    break;
+            }
         });
+        
+        // Wheel navigation
+        document.addEventListener('wheel', (e) => {
+            if (this.isAnimating) return;
+            e.preventDefault();
+            if (e.deltaY > 0) {
+                this.nextSection();
+            } else {
+                this.prevSection();
+            }
+        }, { passive: false });
     }
     
     nextSection() {
@@ -56,53 +78,84 @@ class JourneyPortfolio {
         }
     }
     
-    goToSection(sectionIndex) {
-        this.isAnimating = true;
-        this.currentSection = sectionIndex;
+    goToSection(targetSection) {
+        if (this.isAnimating || targetSection === this.currentSection) return;
         
-        this.updateRoadPosition();
+        this.isAnimating = true;
+        this.currentSection = targetSection;
+        
+        // Animate everything
+        this.updateRoad();
         this.updateProgress();
         this.updateContent();
         this.updateButtons();
         
+        // Reset animation lock
         setTimeout(() => {
             this.isAnimating = false;
-        }, 800);
+        }, 900);
     }
     
-    updateRoadPosition() {
-        const roadPosition = -(this.currentSection * 10);
-        this.roadContainer.style.transform = `translateX(${roadPosition}%)`;
+    updateRoad() {
+        const offset = -(this.currentSection * 10);
+        this.roadContainer.style.transform = `translateX(${offset}%)`;
     }
     
     updateProgress() {
-        const progress = ((this.currentSection + 1) / this.totalSections) * 100;
-        this.progressFill.style.width = `${progress}%`;
+        const percentage = ((this.currentSection + 1) / this.totalSections) * 100;
+        this.progressFill.style.width = `${percentage}%`;
     }
     
     updateContent() {
-        // Hide all sections
-        this.sections.forEach(section => {
+        // Remove active from all
+        this.sections.forEach((section, index) => {
             section.classList.remove('active');
         });
-        
-        // Hide all dots
-        this.dots.forEach(dot => {
+        this.dots.forEach((dot, index) => {
             dot.classList.remove('active');
         });
         
-        // Show current section and dot
+        // Add active to current
         this.sections[this.currentSection].classList.add('active');
         this.dots[this.currentSection].classList.add('active');
     }
     
     updateButtons() {
-        this.prevBtn.style.opacity = this.currentSection > 0 ? '1' : '0.5';
-        this.nextBtn.style.opacity = this.currentSection < this.totalSections - 1 ? '1' : '0.5';
+        this.prevBtn.disabled = this.currentSection === 0;
+        this.nextBtn.disabled = this.currentSection === this.totalSections - 1;
+        
+        this.prevBtn.style.opacity = this.currentSection > 0 ? '1' : '0.4';
+        this.nextBtn.style.opacity = this.currentSection < this.totalSections - 1 ? '1' : '0.4';
+        
+        // Visual feedback
+        if (this.currentSection === 0) {
+            this.prevBtn.style.cursor = 'not-allowed';
+        } else {
+            this.prevBtn.style.cursor = 'pointer';
+        }
+        
+        if (this.currentSection === this.totalSections - 1) {
+            this.nextBtn.style.cursor = 'not-allowed';
+        } else {
+            this.nextBtn.style.cursor = 'pointer';
+        }
+    }
+    
+    updateAll() {
+        this.updateRoad();
+        this.updateProgress();
+        this.updateContent();
+        this.updateButtons();
     }
 }
 
-// Initialize portfolio when DOM is loaded
+// 🔥 START ON LOAD
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('🚀 Portfolio loaded!');
     new JourneyPortfolio();
+});
+
+// Smooth page load
+window.addEventListener('load', () => {
+    document.body.style.opacity = '1';
 });
