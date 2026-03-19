@@ -1,94 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pradeep M - Busfolio Portfolio</title>
-    >
-    //fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    //cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pradeep · Journey Resume</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body class="dark">
-    <!-- Theme Toggle -->
-    <button class="theme-toggle" id="themeToggle">
-        <i class="fas fa-sun"></i>
-        <i class="fas fa-moon"></i>
-    </button>
+<body>
+  <div class="journey-container">
+    <!-- LEFT SIDE: Road & Bus -->
+    <div class="left-side">
+      <div class="sky"></div>
+      <div class="cloud cloud-1"></div>
+      <div class="cloud cloud-2"></div>
 
-    <div class="journey-container">
-        <!-- LEFT: Journey Track & Bus -->
-        <div class="left-panel">
-            <!-- Vertical Journey Track -->
-            <div class="journey-track">
-                <div class="track-line">
-                    <div class="track-progress" id="trackProgress"></div>
-                </div>
-                <div class="track-stops" id="trackStops"></div>
-            </div>
-
-            <!-- Clean Road -->
-            <div class="road-container">
-                <div class="road"></div>
-                <div class="road-lines"></div>
-            </div>
-
-            <!-- Modern Bus -->
-            <div class="bus-container" id="busContainer">
-                <div class="bus" id="bus">
-                    <div class="bus-body">
-                        <div class="bus-roof"></div>
-                        <div class="bus-windows">
-                            <div class="window"></div>
-                            <div class="window"></div>
-                            <div class="window"></div>
-                        </div>
-                        <div class="bus-front">
-                            <div class="headlights"></div>
-                            <div class="grille"></div>
-                        </div>
-                    </div>
-                    <div class="bus-wheels">
-                        <div class="wheel front-wheel">
-                            <div class="wheel-rim"></div>
-                        </div>
-                        <div class="wheel rear-wheel">
-                            <div class="wheel-rim"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <div class="road-container">
+        <div class="road" id="road">
+          <!-- Stops -->
+          <div class="stop" data-section="intro"></div>
+          <div class="stop" data-section="objective"></div>
+          <div class="stop" data-section="education"></div>
+          <div class="stop" data-section="skills"></div>
+          <div class="stop" data-section="experience"></div>
+          <div class="stop" data-section="projects"></div>
+          <div class="stop" data-section="certificates"></div>
+          <div class="stop" data-section="contact"></div>
+          <div class="stop" data-section="technical"></div>
+          <div class="stop" data-section="journey-complete"></div>
         </div>
+      </div>
 
-        <!-- RIGHT: Content Preview -->
-        <div class="right-panel">
-            <div class="content-preview" id="contentPreview">
-                <div class="preview-inner">
-                    <div class="section-content active" data-section="0">
-                        <h1>Pradeep M</h1>
-                        <h2>B.E (Hons) ECE</h2>
-                        <p>Sriperumbudur</p>
-                        <span>Tech journey begins 🚀</span>
-                    </div>
-                </div>
-            </div>
+      <div class="bus">
+        <div class="bus-body">
+          <div class="window"></div>
+          <div class="window"></div>
+          <div class="window"></div>
+          <div class="window window-small"></div>
         </div>
+        <div class="wheel wheel-left"></div>
+        <div class="wheel wheel-right"></div>
+      </div>
+
+      <!-- Progress bar -->
+      <div class="progress-container">
+        <div class="progress-bar" id="progress-bar"></div>
+        <div class="progress-dots" id="dots"></div>
+      </div>
     </div>
 
-    <!-- Full Content Modal -->
-    <div class="modal-overlay" id="modalOverlay">
-        <div class="modal-content" id="modalContent">
-            <div class="modal-nav">
-                <button class="nav-btn prev" id="modalPrev">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                <span class="section-counter" id="sectionCounter">1 / 10</span>
-                <button class="nav-btn next" id="modalNext">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-            </div>
+    <!-- RIGHT SIDE: Popup Card -->
+    <div class="right-side">
+      <div class="card" id="card">
+        <div class="card-content">
+          <h2 id="card-title">Intro</h2>
+          <div id="card-text"></两位 onclick="nextSection()">Next</div>
         </div>
-    </div>
+      </div>
 
-    <script src="script.js"></script>
+      <div class="card-buttons">
+        <button id="prev-btn" class="nav-btn">← Previous</button>
+        <button id="next-btn" class="nav-btn">Next →</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
