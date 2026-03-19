@@ -34,7 +34,7 @@ body {
 .cloud2 { width: 100px; height: 40px; left: 60%; }
 .cloud3 { width: 140px; height: 50px; left: 80%; top: 15%; }
 
-/* REAL HIGHWAY ROAD */
+/* REAL HIGHWAY WITH RECTANGLE MARKINGS */
 .road-wrapper {
   position: absolute; bottom: 120px; left: 0; width: 100%; height: 220px;
   border-radius: 30px 30px 0 0; overflow: hidden; z-index: 10;
@@ -48,37 +48,47 @@ body {
   will-change: transform;
 }
 
-/* PROPER MOVING ROAD MARKINGS */
+/* RECTANGLE ROAD MARKINGS - REAL HIGHWAY */
 .road::before {
   content: '';
   position: absolute;
-  top: 0;
+  top: 28%;
   left: 0;
   right: 0;
   bottom: 0;
   background-image:
-    /* CENTER YELLOW LINE - MOVING */
-    repeating-linear-gradient(
-      0deg,
-      transparent 0px,
-      transparent 80px,
-      #ffff44 80px,
-      #ffff44 100px,
-      transparent 100px,
-      transparent 180px
+    /* YELLOW CENTER LINE - RECTANGLES */
+    repeating-conic-gradient(
+      from 90deg at 50% 50%,
+      transparent 0deg,
+      transparent 8deg,
+      #ffff44 8deg,
+      #ffff44 12deg,
+      transparent 12deg,
+      transparent 24deg
     ),
-    /* LANE MARKINGS - MOVING */
-    repeating-linear-gradient(
-      0deg,
-      transparent 0px,
-      transparent 120px,
-      #ffffff60 120px,
-      #ffffff60 140px,
-      transparent 140px,
-      transparent 260px
+    /* WHITE LANE MARKINGS - RECTANGLES */
+    repeating-conic-gradient(
+      from 90deg at 25% 50%,
+      transparent 0deg,
+      transparent 10deg,
+      #ffffff70 10deg,
+      #ffffff70 14deg,
+      transparent 14deg,
+      transparent 24deg
+    ),
+    /* WHITE LANE MARKINGS - RIGHT SIDE */
+    repeating-conic-gradient(
+      from 90deg at 75% 50%,
+      transparent 0deg,
+      transparent 10deg,
+      #ffffff70 10deg,
+      #ffffff70 14deg,
+      transparent 14deg,
+      transparent 24deg
     );
   animation: roadMove 3s linear infinite;
-  background-size: 300px 100%, 300px 100%;
+  background-size: 400px 100%, 400px 100%, 400px 100%;
 }
 
 .road::after {
@@ -91,45 +101,66 @@ body {
   background: linear-gradient(180deg, transparent 0%, #4a7c59 100%);
 }
 
-/* CLEAN BUS STOPS */
+/* REAL BUS STOP DESIGN */
 .stop {
-  position: absolute; width: 10%; height: 100%; 
+  position: absolute; width: 12%; height: 100%; 
   left: calc(10% * var(--stop-index, 0));
 }
 
+.bus-stop-shelter {
+  position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
+  width: 80px; height: 60px;
+}
+
+.stop-roof {
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 12px; background: linear-gradient(90deg, #666, #444, #666);
+  border-radius: 8px 8px 0 0; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.stop-walls {
+  position: absolute; top: 12px; left: 4px; right: 4px;
+  height: 36px; background: rgba(255,255,255,0.95);
+  border: 2px solid #666; border-top: none;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.stop-sign {
+  position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%);
+  width: 24px; height: 24px; background: var(--red);
+  border-radius: 50%; border: 4px solid #fff;
+  box-shadow: 0 4px 15px rgba(227,27,35,0.5);
+  opacity: 0.8; transition: all 0.4s ease;
+}
+
+.stop.active .stop-sign {
+  background: #fff; border-color: var(--red);
+  box-shadow: 0 0 25px var(--red);
+  transform: translateX(-50%) scale(1.3);
+  animation: signPulse 1.5s ease-in-out infinite;
+}
+
 .stop-label {
-  position: absolute; top: 15px; left: 50%; transform: translateX(-50%);
-  background: rgba(255,255,255,0.95); color: #333;
-  font-size: 11px; font-weight: 600; padding: 5px 12px;
-  border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-  white-space: nowrap; opacity: 0; transform: translateX(-50%) translateY(10px);
+  position: absolute; top: 20px; left: 50%; transform: translateX(-50%);
+  background: rgba(0,0,0,0.9); color: white;
+  font-size: 10px; font-weight: 700; padding: 4px 8px;
+  border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  white-space: nowrap; opacity: 0;
   transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  letter-spacing: 0.5px; text-transform: uppercase;
 }
 
 .stop-label.show {
-  opacity: 1; transform: translateX(-50%) translateY(0);
+  opacity: 1; transform: translateX(-50%) translateY(-2px);
 }
 
 .stop.active .stop-label {
-  background: linear-gradient(135deg, var(--red), #ff4757); color: white;
-  transform: translateX(-50%) scale(1.05);
-  box-shadow: 0 6px 25px rgba(227,27,35,0.4);
+  background: var(--red); 
+  box-shadow: 0 4px 20px rgba(227,27,35,0.5);
+  transform: translateX(-50%) translateY(-5px) scale(1.05);
 }
 
-.stop-marker {
-  position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
-  width: 14px; height: 14px; background: #fff; border-radius: 50%;
-  border: 3px solid #666; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  transition: all 0.4s ease; opacity: 0.8;
-}
-
-.stop.active .stop-marker {
-  background: var(--red); border-color: #fff;
-  transform: translateX(-50%) scale(1.3);
-  box-shadow: 0 0 20px var(--red);
-}
-
-/* BUS */
+/* BUS (unchanged) */
 .bus {
   position: absolute; bottom: 135px; left: 15%; z-index: 50;
   width: 150px; height: 75px; transition: left 2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -179,11 +210,15 @@ body {
 @keyframes wheelSpin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 @keyframes busBounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
 @keyframes roadMove {
-  0% { background-position: 0 0, 0 0; }
-  100% { background-position: 300px 0, 300px 0; }
+  0% { background-position: 0 0, 0 0, 0 0; }
+  100% { background-position: 400px 0, 400px 0, 400px 0; }
+}
+@keyframes signPulse {
+  0%, 100% { transform: translateX(-50%) scale(1.3); opacity: 1; }
+  50% { transform: translateX(-50%) scale(1.5); opacity: 0.9; }
 }
 
-/* PROGRESS */
+/* PROGRESS + RIGHT SIDE (unchanged from previous working version) */
 .progress-section {
   position: absolute; bottom: 25px; left: 50px; right: 50px;
 }
@@ -207,7 +242,6 @@ body {
   width: 16px; height: 16px; background: var(--red); transform: translateY(-2px);
 }
 
-/* RIGHT SIDE */
 .right-side {
   width: 45%; display: flex; flex-direction: column;
   justify-content: center; align-items: center; padding: 40px 30px;
