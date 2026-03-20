@@ -26,14 +26,24 @@ body {
   background: linear-gradient(to bottom, #87CEEB 0%, #B0E0E6 100%);
 }
 
-.clouds { position: absolute; top: 10%; width: 100%; }
-.cloud {
-  position: absolute; background: rgba(255,255,255,0.9); border-radius: 50px;
-  filter: blur(1px);
+/* Remove .clouds and all cloud classes, add this after .sky */
+
+.sun {
+  position: absolute; top: 15%; right: 15%;
+  width: 80px; height: 80px;
+  background: radial-gradient(circle, #ffd700 0%, #ffed4a 40%, #ffcc00 70%, transparent 100%);
+  border-radius: 50%; 
+  box-shadow: 
+    0 0 40px #ffd700,
+    0 0 80px #ffed4a;
+  animation: sunGlow 3s ease-in-out infinite alternate;
 }
-.cloud1 { width: 120px; height: 45px; left: 10%; }
-.cloud2 { width: 100px; height: 40px; left: 60%; }
-.cloud3 { width: 140px; height: 50px; left: 80%; top: 15%; }
+
+@keyframes sunGlow {
+  0% { box-shadow: 0 0 40px #ffd700, 0 0 80px #ffed4a; }
+  100% { box-shadow: 0 0 50px #ffd700, 0 0 100px #ffed4a, 0 0 20px #fff; }
+}
+
 
 /* PERFECT HORIZONTAL ROAD - MOVES LEFT */
 .road-wrapper {
