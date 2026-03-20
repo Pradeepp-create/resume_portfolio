@@ -19,7 +19,7 @@ class JourneyPortfolio {
 
     this.stopNames = ['Welcome', 'Objective', 'Education', 'Skills', 'Experience', 'Projects', 'Certificates', 'Contact', 'Tech Profile', 'Complete!'];
 
-    // COMPLETE PROFESSIONAL CONTENT
+    // COMPLETE PROFESSIONAL CONTENT (Contact & Tech Profile swapped, links added)
     this.sectionsData = [
       { 
         title: "Welcome Aboard!", 
@@ -27,7 +27,7 @@ class JourneyPortfolio {
           <h3>Pradeep M</h3>
           <p><strong>B.E (Hons) Electronics and Communication Engineering</strong></p>
           <p><strong>Location:</strong> Sriperumbudur (near toll plaza)</p>
-          <p>🚀 Passionate about technology and innovation.</p>
+          <p> Passionate about technology and innovation.</p>
           <p>Ready to drive impactful tech solutions! 💻</p>
         `
       },
@@ -36,10 +36,10 @@ class JourneyPortfolio {
         content: `
           <h3>Driven by Technology</h3>
           <ul>
-            <li>🔥 Strong interest in cutting-edge technology</li>
-            <li>⏰ Excellent time management skills</li>
-            <li>🚀 Seeking growth opportunities in tech</li>
-            <li>💻 Skilled in Python, Cloud Computing, Marketing, Website Building</li>
+            <li>Strong interest in cutting-edge technology</li>
+            <li>Excellent time management skills</li>
+            <li>Seeking growth opportunities in tech</li>
+            <li>Skilled in Python, Cloud Computing, Marketing, Website Building</li>
           </ul>
         `
       },
@@ -51,10 +51,10 @@ class JourneyPortfolio {
           <p><strong>CGPA: 8.5/10</strong></p>
           <p><strong>Specializations:</strong></p>
           <ul>
-            <li>🐍 Python Programming</li>
-            <li>☁️ Cloud Computing</li>
-            <li>📈 Digital Marketing</li>
-            <li>🌐 Website Building</li>
+            <li>Python Programming</li>
+            <li>Cloud Computing</li>
+            <li>Digital Marketing</li>
+            <li>Website Building</li>
           </ul>
         `
       },
@@ -95,7 +95,9 @@ class JourneyPortfolio {
           <ul>
             <li>🗑️ <strong>Waste Segregation System</strong></li>
             <li>🔊 <strong>Digital Acoustic Signal Processing</strong></li>
-            <li>🛒 <strong>E-commerce Website</strong></li>
+            <li>🛒 <strong>E-commerce Website</strong><br>
+                <a href="https://evolvefitcollection.netlify.app/" target="_blank">Live Demo →</a>
+            </li>
           </ul>
         `
       },
@@ -104,23 +106,12 @@ class JourneyPortfolio {
         content: `
           <h3>Certified Expertise</h3>
           <ul>
-            <li>📊 Microsoft Office Productivity</li>
-            <li>☁️ Cloud Computing Training</li>
-            <li>🗣️ Non-verbal Communication</li>
-            <li>💼 Interview Skills</li>
-            <li>🤖 AI Tools for Designing</li>
+            <li>Microsoft Office Productivity</li>
+            <li>Cloud Computing Training</li>
+            <li>Non-verbal Communication</li>
+            <li>Interview Skills</li>
+            <li>AI Tools for Designing</li>
           </ul>
-        `
-      },
-      { 
-        title: "Let's Connect", 
-        content: `
-          <h3>Get In Touch</h3>
-          <p><strong>Email:</strong><br>
-          <a href="mailto:pradeeptn22@gmail.com">pradeeptn22@gmail.com</a></p>
-          <p><strong>Phone:</strong><br>+91 7550199164</p>
-          <p><strong>📍 Sriperumbudur, Tamil Nadu</strong></p>
-          <p>🔗 <strong>LinkedIn</strong> | <strong>GitHub</strong> (Coming Soon)</p>
         `
       },
       { 
@@ -132,6 +123,18 @@ class JourneyPortfolio {
             <li><strong>Languages:</strong><br>Tamil, English</li>
             <li><strong>Tools:</strong><br>Excel, Word, PowerPoint</li>
           </ul>
+        `
+      },
+       { 
+        title: "Let's Connect", 
+        content: `
+          <h3>Get In Touch</h3>
+          <p><strong>Email:</strong><br>
+          <a href="mailto:pradeeptn22@gmail.com">pradeeptn22@gmail.com</a></p>
+          <p><strong>Phone:</strong><br>+91 7550129164</p>
+          <p><strong>📍 Sriperumbudur, Tamil Nadu</strong></p>
+          <p>🔗 <strong><a href="https://github.com/Pradeepp-create/" target="_blank">GitHub</a></strong> | 
+             <strong><a href="https://www.linkedin.com/in/pradeep-m-354b1629b" target="_blank">LinkedIn</a></strong></p>
         `
       },
       { 
